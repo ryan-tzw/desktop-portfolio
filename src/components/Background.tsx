@@ -1,0 +1,34 @@
+import { useEffect, useRef } from 'react'
+import { CanvasManager } from '@/background/CanvasManager'
+import { ShapesEffect } from '@/background/effects/ShapesEffect'
+
+export function Background() {
+    const canvasRef = useRef<HTMLCanvasElement>(null)
+
+    useEffect(() => {
+        const canvas = canvasRef.current
+        if (!canvas) return
+        const ctx = canvas.getContext('2d')
+        if (!ctx) return
+
+        const effect = new ShapesEffect(canvas, ctx)
+        const canvasManager = new CanvasManager(canvas, effect)
+        canvasManager.start()
+
+        return () => {
+            canvasManager.stop()
+        }
+    }, [])
+
+    return (
+        <>
+            <canvas
+                ref={canvasRef}
+                id="background"
+                className="fixed top-0 left-0 h-full w-full"
+            >
+                Animated background
+            </canvas>
+        </>
+    )
+}

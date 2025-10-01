@@ -1,7 +1,7 @@
 import { useDraggable } from '@dnd-kit/core'
-import { faXmark } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useEffect, useRef, useState } from 'react'
+import { TitleBar } from './TitleBar'
+import { CloseButton } from './CloseButton'
 
 interface WindowProps {
     title: string
@@ -12,8 +12,8 @@ interface WindowProps {
 
 export function Window({
     title,
-    width = 320,
-    height = 200,
+    width = 400,
+    height = 300,
     children,
 }: WindowProps) {
     const x = window.innerWidth / 2 - width / 2
@@ -37,7 +37,6 @@ export function Window({
     useEffect(() => {
         if (transform) {
             lastTransform.current = { x: transform.x, y: transform.y }
-            console.log(lastTransform.current)
         }
     }, [transform])
 
@@ -67,26 +66,20 @@ export function Window({
         <div
             ref={setNodeRef}
             style={style}
-            className="overflow-hidden rounded-xl shadow-md backdrop-blur-xs"
+            className="flex flex-col overflow-hidden rounded-xl shadow-md backdrop-blur-xs"
         >
-            {/* Title Bar */}
-            <div
+            <TitleBar
+                title={title}
                 ref={setActivatorNodeRef}
                 {...listeners}
                 {...attributes}
-                className="flex h-12 cursor-default text-white"
             >
-                <h1 className="font-fredoka h-full flex-1 content-center bg-[rgba(0,0,0,0.7)] px-4">
-                    {title}
-                </h1>
+                <CloseButton />
+            </TitleBar>
 
-                <button className="bg-[rgba(0,0,0,0.7)] px-4 hover:bg-[rgba(128,0,0,0.7)]">
-                    <FontAwesomeIcon icon={faXmark} />
-                </button>
+            <div className="flex-1 rounded-b-xl border border-white bg-[rgba(255,255,255,0.7)]">
+                {children}
             </div>
-
-            {/* Contents */}
-            <div>{children}</div>
         </div>
     )
 }
