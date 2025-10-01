@@ -43,7 +43,7 @@ export class ShapesEffect extends BaseEffect {
 
     update(deltaTime: number): void {
         this.shapes.forEach((shape) => {
-            shape.x -= deltaTime * 0.05
+            shape.x -= deltaTime * 0.02
             if (shape.x < -shape.size / 2) {
                 shape.x = this.canvas.width + shape.size / 2
             }

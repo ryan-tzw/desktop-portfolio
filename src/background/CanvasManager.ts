@@ -10,7 +10,7 @@ export class CanvasManager {
     private animationFrameId: number | null = null
     private effect: BaseEffect
     private lastTimestamp: number = 0
-    private targetFPS: number = 30
+    private targetFPS: number = 60
     private frameInterval: number = 1000 / this.targetFPS
 
     public constructor(canvas: HTMLCanvasElement, effect: BaseEffect) {
@@ -45,6 +45,8 @@ export class CanvasManager {
         const render = (timestamp: number) => {
             if (this.ctx) {
                 const deltaTime = timestamp - this.lastTimestamp
+
+                // Only update and render if enough time has passed based on target FPS
                 if (deltaTime >= this.frameInterval) {
                     this.lastTimestamp =
                         timestamp - (deltaTime % this.frameInterval)
@@ -57,8 +59,14 @@ export class CanvasManager {
                         this.canvas.height
                     )
 
+                    // Clamp deltaTime to avoid large jumps when tabbing out and back in
+                    const clampedDt = Math.min(
+                        deltaTime,
+                        this.frameInterval * 1.5
+                    )
+
                     // Update and render the effect
-                    this.effect.update(deltaTime)
+                    this.effect.update(clampedDt)
                     this.effect.render()
                 }
             }
