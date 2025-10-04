@@ -1,9 +1,11 @@
-import { useDraggable } from '@dnd-kit/core'
-import { useEffect, useRef, useState } from 'react'
 import { TitleBar } from './TitleBar'
 import { CloseButton } from './CloseButton'
+import { cn } from '@/lib/utils'
+import { useDraggableWindow } from '@/components/Window/useDraggableWindow'
+import { useIsMobile } from '@/hooks/useIsMobile'
 
 interface WindowProps {
+    id: string
     title: string
     width?: number
     height?: number
@@ -11,73 +13,47 @@ interface WindowProps {
 }
 
 export function Window({
-    title,
+    id,
     width = 400,
     height = 300,
+    title,
     children,
 }: WindowProps) {
-    const x = window.innerWidth / 2 - width / 2
-    const y = window.innerHeight / 2 - height / 2
+    const isMobile = useIsMobile()
 
-    const [position, setPosition] = useState({ x, y })
-    const lastTransform = useRef({ x: 0, y: 0 })
-
-    const {
-        attributes,
-        listeners,
-        setNodeRef,
-        setActivatorNodeRef,
-        transform,
-        isDragging,
-    } = useDraggable({
-        id: 'draggable',
+    const { style, dragProps, dragHandleProps } = useDraggableWindow({
+        id,
+        width,
+        height,
+        disabled: isMobile,
     })
 
-    // Keep track of the last transform value
-    useEffect(() => {
-        if (transform) {
-            lastTransform.current = { x: transform.x, y: transform.y }
-        }
-    }, [transform])
-
-    // When stop dragging, update the position
-    useEffect(() => {
-        if (!isDragging) {
-            setPosition((prev) => ({
-                x: prev.x + lastTransform.current!.x,
-                y: prev.y + lastTransform.current!.y,
-            }))
-        }
-    }, [isDragging])
-
-    // Calculate the style for the draggable element
-    const style: React.CSSProperties = {
-        position: 'absolute',
-        width: width,
-        height: height,
-        left: position.x,
-        top: position.y,
-        transform: transform
-            ? `translate3d(${transform.x}px, ${transform.y}px, 0)`
-            : undefined,
+    const mobileStyle: React.CSSProperties = {
+        position: 'fixed',
+        inset: 0,
+        width: '100dvw',
+        height: '100dvh',
     }
 
     return (
         <div
-            ref={setNodeRef}
-            style={style}
-            className="flex flex-col overflow-hidden rounded-xl shadow-md backdrop-blur-xs"
+            {...(!isMobile && dragProps)}
+            style={isMobile ? mobileStyle : style}
+            className={cn(
+                'flex flex-col overflow-hidden shadow-lg backdrop-blur-xs',
+                isMobile ? 'rounded-t-xl' : 'rounded-xl'
+            )}
         >
-            <TitleBar
-                title={title}
-                ref={setActivatorNodeRef}
-                {...listeners}
-                {...attributes}
-            >
+            <TitleBar title={title} {...(!isMobile && dragHandleProps)}>
                 <CloseButton />
             </TitleBar>
 
-            <div className="flex-1 rounded-b-xl border border-white bg-[rgba(255,255,255,0.7)]">
+            <div
+                className={cn(
+                    'flex-1 border border-white bg-white',
+                    isMobile ? 'rounded-none' : 'rounded-b-xl'
+                )}
+            >
                 {children}
             </div>
         </div>

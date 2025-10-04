@@ -15,8 +15,12 @@ export class ShapesEffect extends BaseEffect {
     private generateShapes() {
         this.shapes = []
 
+        const shapeDensity = 8 // Shapes per 1000px
         const shapeSize = 50
-        const numShapes = 9
+        const numShapes = Math.max(
+            Math.floor((this.canvas.width / 1000) * shapeDensity),
+            3
+        )
 
         // space between shapes
         const spacing =
@@ -35,8 +39,8 @@ export class ShapesEffect extends BaseEffect {
     }
 
     private setStyle() {
-        this.ctx.fillStyle = '#c3b3ff'
-        this.ctx.strokeStyle = '#c3b3ff'
+        this.ctx.fillStyle = '#a688fd'
+        this.ctx.strokeStyle = '#a688fd'
         this.ctx.lineWidth = 4
         this.ctx.lineJoin = 'round'
     }
@@ -58,7 +62,7 @@ export class ShapesEffect extends BaseEffect {
         this.ctx.restore()
     }
 
-    resize(width: number, height: number): void {
+    resize(): void {
         this.generateShapes()
     }
 }

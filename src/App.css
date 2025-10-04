@@ -6,6 +6,6 @@ body {
 
 #root {
     position: relative;
-    height: 100vh;
+    height: 100dvh;
     max-width: 100%;
 }
