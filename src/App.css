@@ -1,3 +1,7 @@
+* {
+    scrollbar-color: #999 transparent;
+}
+
 html,
 body {
     max-width: 100%;

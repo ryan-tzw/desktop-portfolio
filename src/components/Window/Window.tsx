@@ -10,6 +10,7 @@ interface WindowProps {
     width?: number
     height?: number
     children?: React.ReactNode
+    className?: string
 }
 
 export function Window({
@@ -18,6 +19,7 @@ export function Window({
     height = 300,
     title,
     children,
+    className = '',
 }: WindowProps) {
     const isMobile = useIsMobile()
 
@@ -31,8 +33,6 @@ export function Window({
     const mobileStyle: React.CSSProperties = {
         position: 'fixed',
         inset: 0,
-        width: '100dvw',
-        height: '100dvh',
     }
 
     return (
@@ -50,8 +50,9 @@ export function Window({
 
             <div
                 className={cn(
-                    'flex-1 border border-white bg-white',
-                    isMobile ? 'rounded-none' : 'rounded-b-xl'
+                    'flex-1 overflow-auto bg-white',
+                    isMobile ? 'rounded-none' : 'rounded-b-xl',
+                    className
                 )}
             >
                 {children}

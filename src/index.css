@@ -24,6 +24,42 @@
     --shadow-solid: 0 4px 0 0 rgb(0 0 0 / 0.25);
 }
 
+@layer base {
+    p {
+        @apply mb-4 leading-relaxed;
+    }
+}
+
+@layer utilities {
+    /* Reusable tilted marker behind text */
+    .tilt-highlight {
+        @apply relative z-0 inline;
+    }
+    .tilt-highlight::before {
+        content: '';
+        @apply absolute -z-10 rounded-[var(--tilt-radius)];
+        height: 0.7em;
+        width: 110%;
+        left: 50%;
+        top: 50%;
+        background: theme(colors.melrose.200);
+        transform: rotate(-2deg) translate(-50%, -50%);
+    }
+    .fixed-tilt-highlight {
+        @apply relative z-0 inline;
+    }
+    .fixed-tilt-highlight::before {
+        content: '';
+        @apply absolute -z-10 rounded-[var(--tilt-radius)];
+        left: 50%;
+        top: 50%;
+        width: 6em;
+        height: 1em;
+        background: theme(colors.melrose.200);
+        transform: rotate(-2deg) translate(-50%, -50%);
+    }
+}
+
 @theme inline {
     --radius-sm: calc(var(--radius) - 4px);
     --radius-md: calc(var(--radius) - 2px);
