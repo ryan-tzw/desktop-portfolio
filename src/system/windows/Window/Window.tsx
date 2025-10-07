@@ -57,11 +57,11 @@ export function Window({
             style={style}
             className={cn(
                 'flex flex-col overflow-hidden shadow-lg backdrop-blur-xs',
-                'transition md:transition-[scale,opacity]',
+                'transition duration-300 md:transition-[scale,opacity]',
                 'rounded-t-xl md:rounded-xl',
                 isVisible
-                    ? 'scale-100 opacity-100'
-                    : 'pointer-events-none scale-0 opacity-0'
+                    ? 'translate-y-0 opacity-100 md:scale-100'
+                    : 'pointer-events-none translate-y-full opacity-0 md:translate-y-0 md:scale-0'
             )}
         >
             <TitleBar title={title} {...(!isMobile && dragHandleProps)}>
