@@ -4,34 +4,39 @@ import { useWindowOffset } from './useWindowOffset'
 
 interface UseDraggableWindowProps {
     id: string
+    disabled?: boolean
     size: { width: number; height: number }
     initPosition?: { x: number; y: number }
-    disabled?: boolean
+    origin?: { x: number; y: number }
 }
 
 export function useDraggableWindow({
     id,
-    size = { width: 400, height: 300 },
-    initPosition: initialPosition,
     disabled = false,
+    size = { width: 400, height: 300 },
+    initPosition = {
+        x: window.innerWidth / 2 - size.width / 2,
+        y: window.innerHeight / 2 - size.height / 2,
+    },
+    origin = {
+        x: window.innerWidth / 2,
+        y: window.innerHeight / 2,
+    },
 }: UseDraggableWindowProps) {
-    const [position, setPosition] = useState(() => {
-        if (initialPosition) return initialPosition
-
-        // if not given, start in the center of the screen
-        return {
-            x: window.innerWidth / 2 - size.width / 2,
-            y: window.innerHeight / 2 - size.height / 2,
-        }
+    const [position, setPosition] = useState(initPosition)
+    const transformOrigin = useRef({
+        x: origin.x - initPosition.x,
+        y: origin.y - initPosition.y,
     })
-    const lastTransform = useRef({ x: 0, y: 0 })
 
     // track offset from center of the screen
     const { updateOffset } = useWindowOffset({
-        initialPosition,
+        initialPosition: initPosition,
         size,
         onPositionChange: setPosition,
     })
+
+    const lastTransform = useRef({ x: 0, y: 0 })
 
     const {
         attributes,
@@ -59,11 +64,17 @@ export function useDraggableWindow({
                 y: prev.y + lastTransform.current!.y,
             }))
 
-            // also calc the new offset
+            // also calc the new offset of the window from center of screen
             updateOffset((prev) => ({
                 x: prev.x + lastTransform.current!.x,
                 y: prev.y + lastTransform.current!.y,
             }))
+
+            // and update the transform origin
+            transformOrigin.current = {
+                x: transformOrigin.current.x - lastTransform.current!.x,
+                y: transformOrigin.current.y - lastTransform.current!.y,
+            }
         }
     }, [isDragging, updateOffset])
 
@@ -76,6 +87,8 @@ export function useDraggableWindow({
         transform: transform
             ? `translate(${transform.x}px, ${transform.y}px)`
             : undefined,
+
+        transformOrigin: `${transformOrigin.current.x}px ${transformOrigin.current.y}px`,
     }
 
     const mobileStyle: React.CSSProperties = {

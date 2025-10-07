@@ -7,8 +7,7 @@ export function AboutWindow() {
         <Window
             id="about"
             title="About"
-            width={480}
-            height={600}
+            size={{ width: 480, height: 600 }}
             className="flex flex-col gap-6 p-6 pb-12"
         >
             <div className="mx-auto my-4 grid grid-cols-2 place-items-center justify-center gap-6">

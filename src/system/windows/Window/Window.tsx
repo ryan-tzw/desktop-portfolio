@@ -9,16 +9,18 @@ import { useEffect, useRef } from 'react'
 interface WindowProps {
     id: string
     title: string
-    width?: number
-    height?: number
+    size?: { width: number; height: number }
+    initPosition?: { x: number; y: number }
+    origin?: { x: number; y: number }
     children?: React.ReactNode
     className?: string
 }
 
 export function Window({
     id,
-    width = 400,
-    height = 300,
+    size = { width: 400, height: 300 },
+    initPosition,
+    origin,
     title,
     children,
     className = '',
@@ -34,24 +36,16 @@ export function Window({
 
     const { style, dragProps, dragHandleProps } = useDraggableWindow({
         id,
-        size: { width, height },
         disabled: isMobile,
+        size,
+        initPosition,
+        origin,
     })
 
     useEffect(() => {
         // on first mount, starts out scale 0
         // then after first render, set to scale 100 to allow anim to play
         hasAnimatedIn.current = true
-
-        // const rect = rootRef.current!.getBoundingClientRect()
-        // const windowMiddleCoords = {
-        //     x: rect.left + rect.width / 2,
-        //     y: rect.top + rect.height / 2,
-        // }
-        // const offsetFromCenter = {
-        //     x: windowMiddleCoords.x - window.innerWidth / 2,
-        //     y: windowMiddleCoords.y - window.innerHeight / 2,
-        // }
     }, [])
 
     const isVisible = !minimised && hasAnimatedIn.current
