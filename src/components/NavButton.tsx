@@ -1,16 +1,19 @@
 import { cn } from '@/lib/utils'
+import { useWindowStore } from '@/stores/windows.store'
 
 interface NavButtonProps {
+    id: string
     image: string
     text: string
-    onClick: () => void
 }
 
-export function NavButton({ image, text, onClick }: NavButtonProps) {
+export function NavButton({ id, image, text }: NavButtonProps) {
+    const open = useWindowStore((state) => state.open)
+
     return (
         <>
             <button
-                onClick={onClick}
+                onClick={() => open(id)}
                 className={cn(
                     'flex flex-col items-center rounded-lg p-4',
                     'transition hover:scale-105 hover:bg-[rgba(0,0,0,0.05)]',

@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
-import { CanvasManager } from '@/background/CanvasManager'
-import { ShapesEffect } from '@/background/effects/ShapesEffect'
+import { CanvasManager } from './CanvasManager'
+import { ShapesEffect } from './effects/ShapesEffect'
 
 export function Background() {
     const canvasRef = useRef<HTMLCanvasElement>(null)

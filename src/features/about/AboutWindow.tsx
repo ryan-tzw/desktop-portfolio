@@ -1,8 +1,8 @@
 import { ProfileImage } from '@/components/ProfileImage'
 import { Section } from '@/components/Section'
-import { Window } from '@/components/Window'
+import { Window } from '@/system/windows/Window'
 
-export function About() {
+export function AboutWindow() {
     return (
         <Window
             id="about"

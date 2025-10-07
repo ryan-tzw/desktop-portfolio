@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils'
-import { NavButton } from './NavButton'
+import { NavButton } from '../../components/NavButton'
 
-export function Desktop() {
+export function Launcher() {
     return (
         <div
             className={cn(
@@ -28,34 +28,34 @@ export function Desktop() {
                     )}
                 >
                     <NavButton
+                        id="dev"
                         image="src/assets/icons/dev-folder.png"
                         text="Dev"
-                        onClick={() => {}}
                     />
                     <NavButton
+                        id="about"
                         image="src/assets/icons/about.png"
                         text="About"
-                        onClick={() => {}}
                     />
                     <NavButton
+                        id="contact"
                         image="src/assets/icons/contact.png"
                         text="Contact"
-                        onClick={() => {}}
                     />
                     <NavButton
+                        id="creative"
                         image="src/assets/icons/creative-folder.png"
                         text="Creative"
-                        onClick={() => {}}
                     />
                     <NavButton
+                        id="this-pc"
                         image="src/assets/icons/desktop.png"
                         text="This PC"
-                        onClick={() => {}}
                     />
                     <NavButton
+                        id="music"
                         image="src/assets/icons/music.png"
                         text="Music"
-                        onClick={() => {}}
                     />
                 </nav>
             </div>

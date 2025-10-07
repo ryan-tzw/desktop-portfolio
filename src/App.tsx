@@ -1,14 +1,14 @@
 import './App.css'
-import { Background } from './components/Background'
-import { Desktop } from './components/Desktop'
-import { About } from './windows/About'
+import { Background } from './system/background'
+import { Launcher } from './system/layout/Launcher'
+import { WindowManager } from './system/windows/WindowManager'
 
 function App() {
     return (
         <>
             <main className="relative z-10 grid h-dvh place-items-center">
-                <Desktop />
-                <About />
+                <Launcher />
+                <WindowManager />
             </main>
 
             <Background />

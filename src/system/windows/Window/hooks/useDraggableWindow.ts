@@ -1,24 +1,37 @@
 import { useDraggable } from '@dnd-kit/core'
 import { useEffect, useRef, useState } from 'react'
+import { useWindowOffset } from './useWindowOffset'
 
 interface UseDraggableWindowProps {
     id: string
-    width?: number
-    height?: number
+    size: { width: number; height: number }
+    initPosition?: { x: number; y: number }
     disabled?: boolean
 }
 
 export function useDraggableWindow({
     id,
-    width = 400,
-    height = 300,
+    size = { width: 400, height: 300 },
+    initPosition: initialPosition,
     disabled = false,
 }: UseDraggableWindowProps) {
-    const x = window.innerWidth / 2 - width / 2
-    const y = window.innerHeight / 2 - height / 2
+    const [position, setPosition] = useState(() => {
+        if (initialPosition) return initialPosition
 
-    const [position, setPosition] = useState({ x, y })
+        // if not given, start in the center of the screen
+        return {
+            x: window.innerWidth / 2 - size.width / 2,
+            y: window.innerHeight / 2 - size.height / 2,
+        }
+    })
     const lastTransform = useRef({ x: 0, y: 0 })
+
+    // track offset from center of the screen
+    const { updateOffset } = useWindowOffset({
+        initialPosition,
+        size,
+        onPositionChange: setPosition,
+    })
 
     const {
         attributes,
@@ -38,20 +51,26 @@ export function useDraggableWindow({
         }
     }, [transform])
 
-    // When stop dragging, update the position
     useEffect(() => {
+        // When stop dragging, update the position
         if (!isDragging) {
             setPosition((prev) => ({
                 x: prev.x + lastTransform.current!.x,
                 y: prev.y + lastTransform.current!.y,
             }))
+
+            // also calc the new offset
+            updateOffset((prev) => ({
+                x: prev.x + lastTransform.current!.x,
+                y: prev.y + lastTransform.current!.y,
+            }))
         }
-    }, [isDragging])
+    }, [isDragging, updateOffset])
 
     const style: React.CSSProperties = {
         position: 'absolute',
-        width: width,
-        height: height,
+        width: size.width,
+        height: size.height,
         left: position.x,
         top: position.y,
         transform: transform
@@ -59,8 +78,13 @@ export function useDraggableWindow({
             : undefined,
     }
 
+    const mobileStyle: React.CSSProperties = {
+        position: 'fixed',
+        inset: 0,
+    }
+
     return {
-        style,
+        style: disabled ? mobileStyle : style,
         dragProps: {
             ref: setNodeRef,
             ...attributes,
