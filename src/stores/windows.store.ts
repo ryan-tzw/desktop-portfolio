@@ -1,3 +1,4 @@
+import type { Project } from '@/types'
 import { create } from 'zustand'
 
 /**
@@ -7,37 +8,51 @@ import { create } from 'zustand'
  * windows only minimise, so they always stay in the DOM
  */
 
+type WindowParams = {
+    project?: Project
+}
+
 type WindowState = {
     isMinimised: boolean
     zIndex: number
 }
 
 type WindowStore = {
-    windows: Map<string, WindowState>
+    /** Currently active windows + params. Used by WindowManager */
+    activeWindows: Map<string, WindowParams>
+    /** UI state for each active window. Used by individual Window components */
+    windowStates: Map<string, WindowState>
+
     maxZIndex: number
-    open: (id: string) => void
+    open: (id: string, params?: WindowParams) => void
     minimise: (id: string) => void
     bringToFront: (id: string) => void
 }
 
 export const useWindowStore = create<WindowStore>((set) => ({
-    windows: new Map(),
-    maxZIndex: 1,
+    activeWindows: new Map(),
+    windowStates: new Map(),
+    maxZIndex: 100, // start above other UI elements in the same stacking context
 
-    open: (id) => {
+    open: (id, params = {}) => {
         console.log('Opening window:', id)
 
         set((state) => {
-            const windows = new Map(state.windows)
+            const activeWindows = new Map(state.activeWindows)
+            const windowStates = new Map(state.windowStates)
 
-            // Either load for the first time, or restore from minimised state
-            windows.set(id, {
+            // Tell WindowManager to render the Window
+            activeWindows.set(id, params)
+
+            // Open the window and bring to front
+            windowStates.set(id, {
                 isMinimised: false,
                 zIndex: state.maxZIndex + 1,
             })
 
             return {
-                windows: windows,
+                activeWindows,
+                windowStates,
                 maxZIndex: state.maxZIndex + 1,
             }
         })
@@ -47,28 +62,32 @@ export const useWindowStore = create<WindowStore>((set) => ({
         console.log('Minimising window:', id)
 
         set((state) => {
-            const windows = new Map(state.windows)
-            const window = windows.get(id)
+            const windowStates = new Map(state.windowStates)
+            const window = windowStates.get(id)
 
             if (window) {
-                windows.set(id, { ...window, isMinimised: true })
+                windowStates.set(id, { ...window, isMinimised: true })
             }
 
-            return { windows: windows }
+            return { windowStates }
         })
     },
 
     bringToFront: (id) => {
         set((state) => {
-            const windows = new Map(state.windows)
-            const window = windows.get(id)
+            const windowStates = new Map(state.windowStates)
+            const window = windowStates.get(id)
 
-            if (window && !window.isMinimised) {
-                windows.set(id, { ...window, zIndex: state.maxZIndex + 1 })
-                return { windows: windows, maxZIndex: state.maxZIndex + 1 }
-            }
+            if (!window) return state
+            if (window.isMinimised) return state
 
-            return state
+            const currentZIndex = window.zIndex
+
+            // If it's already the topmost window, do nothing
+            if (currentZIndex === state.maxZIndex) return state
+
+            windowStates.set(id, { ...window, zIndex: state.maxZIndex + 1 })
+            return { windowStates, maxZIndex: state.maxZIndex + 1 }
         })
     },
 }))

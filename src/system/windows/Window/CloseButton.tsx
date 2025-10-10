@@ -6,7 +6,7 @@ export function CloseButton(
 ) {
     return (
         <button
-            className="bg-[rgba(0,0,0,0.7)] px-4 hover:bg-[rgba(128,0,0,0.7)]"
+            className="cursor-pointer bg-[rgba(0,0,0,0.7)] px-4 hover:bg-[rgba(128,0,0,0.7)]"
             {...props}
         >
             <FontAwesomeIcon icon={faXmark} />

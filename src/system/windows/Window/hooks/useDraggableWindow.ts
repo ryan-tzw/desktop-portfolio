@@ -1,29 +1,35 @@
 import { useDraggable } from '@dnd-kit/core'
 import { useEffect, useRef, useState } from 'react'
 import { useWindowOffset } from './useWindowOffset'
+import type { DesktopWindowConfig } from '../types'
+
+function getDesktopPropsOrDefaults(desktop: DesktopWindowConfig) {
+    const size = desktop.size || { width: 400, height: 300 }
+    const initPosition = desktop.initPosition || {
+        x: window.innerWidth / 2 - size.width / 2,
+        y: window.innerHeight / 2 - size.height / 2,
+    }
+    const origin = desktop.origin || {
+        x: window.innerWidth / 2,
+        y: window.innerHeight / 2,
+    }
+    return { size, initPosition, origin }
+}
 
 interface UseDraggableWindowProps {
     id: string
     disabled?: boolean
-    size: { width: number; height: number }
-    initPosition?: { x: number; y: number }
-    origin?: { x: number; y: number }
+    desktop?: DesktopWindowConfig
 }
 
 export function useDraggableWindow({
     id,
     disabled = false,
-    size = { width: 400, height: 300 },
-    initPosition = {
-        x: window.innerWidth / 2 - size.width / 2,
-        y: window.innerHeight / 2 - size.height / 2,
-    },
-    origin = {
-        x: window.innerWidth / 2,
-        y: window.innerHeight / 2,
-    },
+    desktop = {},
 }: UseDraggableWindowProps) {
-    const [position, setPosition] = useState(initPosition)
+    const { size, initPosition, origin } = getDesktopPropsOrDefaults(desktop)
+
+    const [position, setPosition] = useState(initPosition) // top/left
     const transformOrigin = useRef({
         x: origin.x - initPosition.x,
         y: origin.y - initPosition.y,
@@ -57,8 +63,8 @@ export function useDraggableWindow({
     }, [transform])
 
     useEffect(() => {
-        // When stop dragging, update the position
         if (!isDragging) {
+            // When stop dragging, update the position
             setPosition((prev) => ({
                 x: prev.x + lastTransform.current!.x,
                 y: prev.y + lastTransform.current!.y,

@@ -1,28 +1,44 @@
-import { AboutWindow } from '@/features/about/AboutWindow'
 import { useWindowStore } from '@/stores/windows.store'
-import { useShallow } from 'zustand/react/shallow'
-
-/**
- * This component renders open windows
- */
-
-const DEFAULT_WINDOWS = {
-    about: AboutWindow,
-} as const
+import { WINDOW_REGISTRY } from './WindowRegistry'
 
 export function WindowManager() {
-    const windows = useWindowStore(
-        useShallow((state) => Array.from(state.windows.keys()))
-    )
+    const windows = useWindowStore((state) => state.activeWindows)
 
     return (
         <>
-            {Array.from(windows).map((id) => {
+            {Array.from(windows.entries()).map(([id, params]) => {
                 console.log('Rendering window:', id)
-                const WindowComponent =
-                    DEFAULT_WINDOWS[id as keyof typeof DEFAULT_WINDOWS]
 
-                return WindowComponent ? <WindowComponent key={id} /> : null
+                const [windowType] = id.split(':')
+                const windowConfig = WINDOW_REGISTRY[windowType]
+
+                if (!windowConfig) {
+                    console.warn(`No window config found for: ${windowType}`)
+                    return null
+                }
+
+                switch (windowConfig.type) {
+                    case 'static': {
+                        const StaticComponent = windowConfig.component
+                        return <StaticComponent key={id} />
+                    }
+                    case 'project': {
+                        const project = params.project
+
+                        if (!project) {
+                            console.warn(
+                                `No project data found for window: ${id}`
+                            )
+                            return null
+                        }
+
+                        const ProjectComponent = windowConfig.component
+                        return <ProjectComponent key={id} project={project} />
+                    }
+                    default:
+                        console.warn(`Unknown window type for: ${windowType}`)
+                        return null
+                }
             })}
         </>
     )

@@ -6,6 +6,10 @@ interface UseWindowOffsetProps {
     onPositionChange: (position: { x: number; y: number }) => void
 }
 
+/**
+ * "Offset" simply means position from the center of the screen, as opposed to position from the top-left corner as is typical in standard CSS.
+ * Offset updates when the window is dragged, and is used to recalculate the actual position on window resize.
+ */
 export function useWindowOffset({
     initialPosition,
     size,

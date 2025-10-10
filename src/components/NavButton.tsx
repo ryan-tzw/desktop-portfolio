@@ -17,7 +17,8 @@ export function NavButton({ id, image, text }: NavButtonProps) {
                 className={cn(
                     'flex flex-col items-center rounded-lg p-4',
                     'transition hover:scale-105 hover:bg-[rgba(0,0,0,0.05)]',
-                    'active:scale-95 active:bg-[rgba(0,0,0,0.05)]'
+                    'active:scale-95 active:bg-[rgba(0,0,0,0.05)]',
+                    'cursor-pointer'
                 )}
             >
                 <img

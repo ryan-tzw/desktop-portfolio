@@ -5,46 +5,33 @@ import { useDraggableWindow } from './hooks/useDraggableWindow'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import { useWindowStore } from '@/stores/windows.store'
 import { useEffect, useRef } from 'react'
-
-interface WindowProps {
-    id: string
-    title: string
-    size?: { width: number; height: number }
-    initPosition?: { x: number; y: number }
-    origin?: { x: number; y: number }
-    children?: React.ReactNode
-    className?: string
-}
+import type { WindowProps } from './types'
 
 export function Window({
     id,
-    size = { width: 400, height: 300 },
-    initPosition,
-    origin,
     title,
+    desktop = {},
     children,
     className = '',
 }: WindowProps) {
     const isMobile = useIsMobile()
+    const zIndex = useWindowStore((state) => state.windowStates.get(id)!.zIndex)
+    const bringToFront = useWindowStore((state) => state.bringToFront)
     const minimise = useWindowStore((state) => state.minimise)
     const minimised = useWindowStore(
-        (state) => state.windows.get(id)?.isMinimised
+        (state) => state.windowStates.get(id)?.isMinimised
     )
     const hasAnimatedIn = useRef(false)
 
-    const rootRef = useRef<HTMLDivElement>(null)
-
+    // Desktop-only draggable window
     const { style, dragProps, dragHandleProps } = useDraggableWindow({
         id,
         disabled: isMobile,
-        size,
-        initPosition,
-        origin,
+        desktop,
     })
 
     useEffect(() => {
-        // on first mount, starts out scale 0
-        // then after first render, set to scale 100 to allow anim to play
+        // initial mount, starts at scale 0; after first render, scale 100 allows anim to play
         hasAnimatedIn.current = true
     }, [])
 
@@ -52,17 +39,18 @@ export function Window({
 
     return (
         <div
-            ref={rootRef}
             {...(!isMobile && dragProps)}
             style={style}
             className={cn(
                 'flex flex-col overflow-hidden shadow-lg backdrop-blur-xs',
                 'transition duration-300 md:transition-[scale,opacity]',
                 'rounded-t-xl md:rounded-xl',
+                `z-[${zIndex}]`,
                 isVisible
                     ? 'translate-y-0 opacity-100 md:scale-100'
                     : 'pointer-events-none translate-y-full opacity-0 md:translate-y-0 md:scale-0'
             )}
+            onPointerDownCapture={() => bringToFront(id)}
         >
             <TitleBar title={title} {...(!isMobile && dragHandleProps)}>
                 <CloseButton onClick={() => minimise(id)} />
