@@ -38,6 +38,7 @@ export const useWindowStore = create<WindowStore>((set) => ({
         console.log('Opening window:', id)
 
         set((state) => {
+            // Copy existing Maps
             const activeWindows = new Map(state.activeWindows)
             const windowStates = new Map(state.windowStates)
 
