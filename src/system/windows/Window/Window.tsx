@@ -40,12 +40,11 @@ export function Window({
     return (
         <div
             {...(!isMobile && dragProps)}
-            style={style}
+            style={{ ...style, zIndex }}
             className={cn(
                 'flex flex-col overflow-hidden shadow-lg backdrop-blur-xs',
                 'transition duration-300 md:transition-[scale,opacity]',
                 'rounded-t-xl md:rounded-xl',
-                `z-[${zIndex}]`,
                 isVisible
                     ? 'translate-y-0 opacity-100 md:scale-100'
                     : 'pointer-events-none translate-y-full opacity-0 md:translate-y-0 md:scale-0'
