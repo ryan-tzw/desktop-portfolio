@@ -1,5 +1,5 @@
 import { useDraggable } from '@dnd-kit/core'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useWindowOffset } from './useWindowOffset'
 import type { DesktopWindowConfig } from '../types'
 
@@ -19,15 +19,15 @@ function getDesktopPropsOrDefaults(desktop: DesktopWindowConfig) {
 interface UseDraggableWindowProps {
     id: string
     disabled?: boolean
-    desktop?: DesktopWindowConfig
+    config?: DesktopWindowConfig
 }
 
 export function useDraggableWindow({
     id,
     disabled = false,
-    desktop = {},
+    config = {},
 }: UseDraggableWindowProps) {
-    const { size, initPosition, origin } = getDesktopPropsOrDefaults(desktop)
+    const { size, initPosition, origin } = getDesktopPropsOrDefaults(config)
 
     const [position, setPosition] = useState(initPosition) // top/left
     const transformOrigin = useRef({
@@ -56,11 +56,32 @@ export function useDraggableWindow({
         disabled: disabled,
     })
 
+    const clampedTransform = useMemo(() => {
+        return transform
+            ? {
+                  x: Math.min(
+                      Math.max(transform.x, -position.x), // don't drag beyond left edge of screen
+                      window.innerWidth - size.width - position.x // don't drag beyond right edge of screen
+                  ),
+                  y: Math.min(
+                      Math.max(transform.y, -position.y), // don't drag beyond top edge of screen
+                      window.innerHeight - size.height - position.y // don't drag beyond bottom edge of screen
+                  ),
+              }
+            : null
+    }, [transform, position, size])
+
+    console.log('transform:', transform)
+    console.log('clampedTransform:', clampedTransform)
+
     useEffect(() => {
-        if (transform) {
-            lastTransform.current = { x: transform.x, y: transform.y }
+        if (clampedTransform) {
+            lastTransform.current = {
+                x: clampedTransform.x,
+                y: clampedTransform.y,
+            }
         }
-    }, [transform])
+    }, [clampedTransform])
 
     useEffect(() => {
         if (!isDragging) {
@@ -90,8 +111,8 @@ export function useDraggableWindow({
         height: size.height,
         left: position.x,
         top: position.y,
-        transform: transform
-            ? `translate(${transform.x}px, ${transform.y}px)`
+        transform: clampedTransform
+            ? `translate(${clampedTransform.x}px, ${clampedTransform.y}px)`
             : undefined,
 
         transformOrigin: `${transformOrigin.current.x}px ${transformOrigin.current.y}px`,

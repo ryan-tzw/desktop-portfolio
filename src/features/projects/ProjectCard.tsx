@@ -1,4 +1,5 @@
 import { cn } from '@/lib/utils'
+import { useWindowStore } from '@/stores/windows.store'
 
 interface ProjectCardProps {
     id: string
@@ -7,8 +8,13 @@ interface ProjectCardProps {
 }
 
 export function ProjectCard({ id, image, title }: ProjectCardProps) {
+    const open = useWindowStore((state) => state.open)
+
     const handleClick = () => {
+        const windowId = `project:${id}`
         console.log(`Project clicked: ${id}`)
+
+        open(windowId, { projectId: id, title })
     }
 
     return (

@@ -1,4 +1,3 @@
-import type { Project } from '@/types'
 import { create } from 'zustand'
 
 /**
@@ -8,9 +7,7 @@ import { create } from 'zustand'
  * windows only minimise, so they always stay in the DOM
  */
 
-type WindowParams = {
-    project?: Project
-}
+type WindowParams = Record<string, unknown>
 
 type WindowState = {
     isMinimised: boolean

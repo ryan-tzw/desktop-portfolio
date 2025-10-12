@@ -1,4 +1,4 @@
-import type { Project } from '@/types'
+import type { ProjectWindowProps } from '@/features/projects/ProjectWindow'
 
 /** Config for desktop windows (not needed on mobile where windows are full-screen) */
 export interface DesktopWindowConfig {
@@ -15,16 +15,12 @@ export interface DesktopWindowConfig {
 export interface WindowProps extends React.ComponentPropsWithoutRef<'div'> {
     id: string
     title: string
-    desktop?: DesktopWindowConfig
+    config?: DesktopWindowConfig
     children?: React.ReactNode
     className?: string
 }
 
-/** Project windows populate data dynamically with the Project type */
-export interface ProjectWindowProps {
-    project: Project
-}
-
+/** Project windows accept a projectId, which it uses to retrieve Project data */
 export interface ProjectWindowConfig {
     type: 'project'
     component: React.ComponentType<ProjectWindowProps>

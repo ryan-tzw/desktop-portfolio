@@ -10,7 +10,7 @@ import type { WindowProps } from './types'
 export function Window({
     id,
     title,
-    desktop = {},
+    config = {},
     children,
     className = '',
 }: WindowProps) {
@@ -27,7 +27,7 @@ export function Window({
     const { style, dragProps, dragHandleProps } = useDraggableWindow({
         id,
         disabled: isMobile,
-        desktop,
+        config: config,
     })
 
     useEffect(() => {

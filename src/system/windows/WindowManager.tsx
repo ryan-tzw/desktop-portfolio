@@ -23,17 +23,23 @@ export function WindowManager() {
                         return <StaticComponent key={id} />
                     }
                     case 'project': {
-                        const project = params.project
+                        const projectId = params.projectId as string
+                        const title = params.title as string
 
-                        if (!project) {
-                            console.warn(
-                                `No project data found for window: ${id}`
-                            )
+                        if (!projectId) {
+                            console.warn(`No projectId for window: ${id}`)
                             return null
                         }
 
                         const ProjectComponent = windowConfig.component
-                        return <ProjectComponent key={id} project={project} />
+                        return (
+                            <ProjectComponent
+                                key={id}
+                                windowId={id}
+                                projectId={projectId}
+                                title={title}
+                            />
+                        )
                     }
                     default:
                         console.warn(`Unknown window type for: ${windowType}`)
