@@ -1,5 +1,6 @@
 import type { WindowConfig } from './Window/types'
 import { AboutWindow } from '@/features/about/AboutWindow'
+import { ContactWindow } from '@/features/contact/ContactWindow'
 import { ProjectWindow } from '@/features/projects/ProjectWindow'
 import { ProjectsWindow } from '@/features/projects/ProjectsWindow'
 
@@ -23,5 +24,9 @@ export const WINDOW_REGISTRY: Record<string, WindowConfig> = {
     project: {
         component: ProjectWindow,
         type: 'project',
+    },
+    contact: {
+        component: ContactWindow,
+        type: 'static',
     },
 } as const

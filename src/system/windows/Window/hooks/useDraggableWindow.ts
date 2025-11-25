@@ -60,12 +60,12 @@ export function useDraggableWindow({
         return transform
             ? {
                   x: Math.min(
-                      Math.max(transform.x, -position.x), // don't drag beyond left edge of screen
-                      window.innerWidth - size.width - position.x // don't drag beyond right edge of screen
+                      Math.max(transform.x, -position.x - size.width * 0.75), // left edge of screen
+                      window.innerWidth - position.x - size.width * 0.25 // right edge of screen
                   ),
                   y: Math.min(
-                      Math.max(transform.y, -position.y), // don't drag beyond top edge of screen
-                      window.innerHeight - size.height - position.y // don't drag beyond bottom edge of screen
+                      Math.max(transform.y, -position.y), // top edge of screen
+                      window.innerHeight - position.y - 48 // bottom edge of screen
                   ),
               }
             : null
