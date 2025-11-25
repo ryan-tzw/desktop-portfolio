@@ -1,9 +1,10 @@
 import { cn } from '@/lib/utils'
 import { Window } from '@/system/windows/Window'
-import { ChatBubble } from './ChatBubble'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub, faSquareLinkedin } from '@fortawesome/free-brands-svg-icons'
+import { ChatBubble } from './ChatBubble'
 import { SocialButton } from './SocialButton'
+import profileImg from '@/assets/profile/profile.png'
 
 export function ContactWindow() {
     return (
@@ -17,7 +18,7 @@ export function ContactWindow() {
             <div className="flex gap-5 border-b-2 border-gray-200 px-6 py-4">
                 <div className="relative">
                     <img
-                        src="src/assets/profile/profile.png"
+                        src={profileImg}
                         className="bg-melrose-50 h-20 rounded-full"
                     />
                     <div

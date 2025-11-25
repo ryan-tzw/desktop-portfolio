@@ -1,5 +1,12 @@
 import { cn } from '@/lib/utils'
 import { NavButton } from '../../components/NavButton'
+// images
+import dev from '@/assets/icons/dev-folder.png'
+import about from '@/assets/icons/about.png'
+import contact from '@/assets/icons/contact.png'
+import creative from '@/assets/icons/creative-folder.png'
+import pc from '@/assets/icons/desktop.png'
+import music from '@/assets/icons/music.png'
 
 export function Launcher() {
     return (
@@ -27,36 +34,12 @@ export function Launcher() {
                         'sm:grid-cols-3'
                     )}
                 >
-                    <NavButton
-                        id="dev"
-                        image="src/assets/icons/dev-folder.png"
-                        text="Dev"
-                    />
-                    <NavButton
-                        id="about"
-                        image="src/assets/icons/about.png"
-                        text="About"
-                    />
-                    <NavButton
-                        id="contact"
-                        image="src/assets/icons/contact.png"
-                        text="Contact"
-                    />
-                    <NavButton
-                        id="creative"
-                        image="src/assets/icons/creative-folder.png"
-                        text="Creative"
-                    />
-                    <NavButton
-                        id="this-pc"
-                        image="src/assets/icons/desktop.png"
-                        text="This PC"
-                    />
-                    <NavButton
-                        id="music"
-                        image="src/assets/icons/music.png"
-                        text="Music"
-                    />
+                    <NavButton id="dev" image={dev} text="Dev" />
+                    <NavButton id="about" image={about} text="About" />
+                    <NavButton id="contact" image={contact} text="Contact" />
+                    <NavButton id="creative" image={creative} text="Creative" />
+                    <NavButton id="this-pc" image={pc} text="This PC" />
+                    <NavButton id="music" image={music} text="Music" />
                 </nav>
             </div>
         </div>
