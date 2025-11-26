@@ -5,10 +5,7 @@ export function CloseButton(
     props: React.ButtonHTMLAttributes<HTMLButtonElement>
 ) {
     return (
-        <button
-            className="cursor-pointer bg-[rgba(0,0,0,0.7)] px-4 hover:bg-[rgba(128,0,0,0.7)]"
-            {...props}
-        >
+        <button className="cursor-pointer px-4 hover:bg-rose-900" {...props}>
             <FontAwesomeIcon icon={faXmark} />
         </button>
     )
