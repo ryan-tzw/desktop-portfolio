@@ -1,0 +1,142 @@
+---
+test: 'hello world'
+---
+
+# H1 – Sample Project
+
+Short intro paragraph with **bold**, _italic_, and **_bold italic_** text.
+You can also do ~~strikethrough~~ and `inline code`.
+
+> Blockquote: “Design is not just what it looks like and feels like. Design is how it works.”
+
+---
+
+## H2 – Lists
+
+### Unordered list
+
+- Item one
+    - Nested item A
+    - Nested item B
+- Item two
+- Item three
+
+### Ordered list
+
+1. First
+2. Second
+3. Third
+    1. Nested sub-item
+    2. Another sub-item
+
+---
+
+## H2 – Task lists (GFM)
+
+- [x] Implement MDX
+- [ ] Add syntax highlighting
+- [ ] Polish typography
+
+---
+
+## H2 – Links and images
+
+Inline link: [Visit the demo](https://example.com/demo).
+
+Reference link: [GitHub repo][repo].
+
+Autolink: https://example.com
+
+Image:
+
+![Sample screenshot alt text](https://picsum.photos/400/300)
+
+[repo]: https://github.com/example/repo
+
+---
+
+## H2 – Code
+
+Inline `code` looks like this inside a sentence.
+
+### Fenced code block (plain)
+
+```python
+print("Hello, World!")
+```
+
+### Fenced code block (language)
+
+```ts
+type User = {
+    id: string
+    name: string
+    roles: string[]
+}
+
+function greet(user: User) {
+    console.log(`Hello, ${user.name}!`)
+}
+```
+
+---
+
+## H2 – Tables (GFM)
+
+| Feature       | Supported | Notes                        |
+| ------------- | :-------: | ---------------------------- |
+| Headings      |    ✅     | H1–H6                        |
+| Lists         |    ✅     | Ordered + unordered          |
+| Task lists    |    ✅     | GFM extension                |
+| Tables        |    ✅     | Alignment left/center/right  |
+| Strikethrough |    ✅     | `~~text~~`                   |
+| Footnotes     |    ✅     | If your parser supports them |
+
+---
+
+## H2 – Footnotes (GFM-style)
+
+Here is a sentence with a footnote reference.[^1]
+Another line with a second footnote.[^longnote]
+
+[^1]: Short footnote text.
+
+[^longnote]:
+    This is a longer footnote.
+    It can span multiple lines and include **formatting**.
+
+---
+
+## H2 – Definition list (if supported)
+
+Term 1
+: Definition for term 1
+
+Term 2
+: Definition for term 2, with _emphasis_.
+
+---
+
+## H2 – Horizontal rules
+
+---
+
+Three hyphens above. You can also use `***` or `___`.
+
+---
+
+## H2 – Inline HTML (optional)
+
+<div className="note">
+    <strong>Note:</strong> This is inline HTML inside Markdown. How it renders
+    depends on your MDX / sanitizer configuration.
+</div>
+
+---
+
+## H2 – Cross-links to other projects
+
+```
+For another experiment, see <ProjectLink slug="wayfare">Wayfare – Hotel Booking App</ProjectLink>.
+You can also link to <ProjectLink slug="sushi-visualizer">Sushi Visualizer</ProjectLink> from here.
+```
