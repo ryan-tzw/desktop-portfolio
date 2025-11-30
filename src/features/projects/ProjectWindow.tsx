@@ -2,6 +2,7 @@ import { loadProject } from '@/data/projects'
 import { Window } from '@/system/windows/Window'
 import type { Project } from '@/types'
 import { useEffect, useState } from 'react'
+import { ProjectPage } from './ProjectPage'
 
 export interface ProjectWindowProps {
     windowId: string
@@ -40,25 +41,21 @@ export function ProjectWindow({
         <Window
             id={windowId}
             title={title}
-            config={{ size: { width: 800, height: 600 } }}
+            config={{ size: { width: 800, height: 650 } }}
         >
             {loading && (
                 <div className="grid h-full place-items-center">
                     Loading project...
                 </div>
             )}
+
             {error && (
                 <div className="grid h-full place-items-center text-red-500">
                     {error}
                 </div>
             )}
 
-            {project && (
-                <div>
-                    <img src={project.heroImage}></img>
-                    <p>{project.description}</p>
-                </div>
-            )}
+            {project && <ProjectPage project={project} />}
         </Window>
     )
 }

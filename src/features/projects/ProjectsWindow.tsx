@@ -13,7 +13,7 @@ export function ProjectsWindow() {
         <Window
             id="dev"
             title="Dev Projects"
-            config={{ size: { width: 800, height: 880 } }}
+            config={{ size: { width: 800, height: 800 } }}
             className="overflow-auto p-2 md:p-4"
         >
             <ul
