@@ -1,6 +1,6 @@
-import type { Project, ProjectThumb } from '@/types'
+import type { Project, ProjectPreview } from '@/types'
 
-export const projects: ProjectThumb[] = [
+export const projects: ProjectPreview[] = [
     {
         id: 'wayfare',
         title: 'Wayfare',

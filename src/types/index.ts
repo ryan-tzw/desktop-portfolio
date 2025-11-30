@@ -1,2 +1,2 @@
 export { type Project } from './Project'
-export { type ProjectThumb } from './ProjectThumb'
+export { type ProjectPreview } from './ProjectPreview'
