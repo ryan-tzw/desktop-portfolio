@@ -13,10 +13,10 @@ const project: Project = {
     },
     tags: [
         { name: 'Web Development', type: 'domain' },
-        { name: 'Computer Graphics', type: 'domain' },
         { name: 'React', type: 'library' },
         { name: 'TypeScript', type: 'language' },
         { name: 'Three.js', type: 'library' },
+        { name: 'Computer Graphics', type: 'domain' },
         { name: 'GLSL', type: 'language' },
         { name: 'Mantine UI', type: 'library' },
         { name: 'Figma', type: 'tool' },

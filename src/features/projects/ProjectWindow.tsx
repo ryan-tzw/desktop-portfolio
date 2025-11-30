@@ -2,7 +2,7 @@ import { loadProject } from '@/data/projects'
 import { Window } from '@/system/windows/Window'
 import type { Project } from '@/types'
 import { useEffect, useState } from 'react'
-import { ProjectPage } from './ProjectPage'
+import { ProjectPage } from './ProjectPage/ProjectPage'
 
 export interface ProjectWindowProps {
     windowId: string
