@@ -1,5 +1,8 @@
 import type { Project, ProjectPreview } from '@/types'
 
+/**
+ * List of projects to display in ProjectsWindow.
+ */
 export const projects: ProjectPreview[] = [
     {
         id: 'wayfare',
@@ -25,6 +28,9 @@ export const projects: ProjectPreview[] = [
 
 const mods = import.meta.glob<{ default: Project }>('./*/meta.ts')
 
+/**
+ * Loads the full project data for a given project ID.
+ */
 export async function loadProject(id: string): Promise<Project> {
     const key = `./${id}/meta.ts`
     const loader = mods[key]
