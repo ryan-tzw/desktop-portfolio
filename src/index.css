@@ -23,6 +23,7 @@
     --color-melrose-950: #2d0e67;
 
     --shadow-solid: 0 4px 0 0 rgb(0 0 0 / 0.25);
+    --shadow-project-hero: 8px 8px var(--color-melrose-200);
 }
 
 @layer base {
