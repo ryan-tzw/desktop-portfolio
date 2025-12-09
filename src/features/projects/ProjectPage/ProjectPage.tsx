@@ -2,6 +2,7 @@ import { cn } from '@/lib/utils'
 import type { Project } from '@/types'
 import { HorizontalDivider, VerticalDivider } from './Divider'
 import { ProjectTag } from './ProjectTag'
+import { ProjectCarousel } from './ProjectCarousel/ProjectCarousel'
 
 interface ProjectPageProps {
     project: Project
@@ -21,7 +22,7 @@ export function ProjectPage({ project }: ProjectPageProps) {
             </span>
 
             {/* Page content */}
-            <article className="flex flex-col gap-6 md:mx-12 md:gap-10">
+            <article className="mb-12 flex flex-col gap-6 md:mx-12 md:gap-10">
                 {/* Hero image */}
                 <section>
                     <img
@@ -32,8 +33,18 @@ export function ProjectPage({ project }: ProjectPageProps) {
 
                 {/* Body */}
                 <section className="mx-6 md:mx-0">
+                    <h1 className="font-fredoka mb-6 text-center text-4xl font-light">
+                        About this project
+                    </h1>
                     <p className="whitespace-pre-line">{project.description}</p>
                 </section>
+
+                {/* Carousel */}
+                {project.media && project.media.length > 0 && (
+                    <section>
+                        <ProjectCarousel images={project.media} />
+                    </section>
+                )}
 
                 {/* Skills and tools */}
                 <section className="mx-6 flex flex-col md:mx-0 md:flex-row">
@@ -53,8 +64,8 @@ export function ProjectPage({ project }: ProjectPageProps) {
 
                     {/* Pills */}
                     <ul className="mt-3 flex flex-wrap gap-2 md:mt-0 md:ml-5">
-                        {project.tags.map((tag) => (
-                            <ProjectTag tag={tag} />
+                        {project.tags.map((tag, index) => (
+                            <ProjectTag tag={tag} key={index} />
                         ))}
                     </ul>
                 </section>

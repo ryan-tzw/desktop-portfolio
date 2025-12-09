@@ -6,7 +6,18 @@ const project: Project = {
     description:
         'A hotel booking website for an academic project. Built with React, TypeScript and the Mantine UI library, with a custom 3D hero section using Three.js, React Three Fiber, and custom GLSL shaders.\n\nThis was my first experience building a full-stack application as part of a large team project (8 people), and I learned a lot from it. Too much to talk about in this little modal, so check out the GitHub repo for more details!',
     heroImage: '/projects/wayfare/hero.webp',
-    // media: ['/projects/wayfare/1.jpg'],
+    media: [
+        'https://picsum.photos/id/100/400/300',
+        'https://picsum.photos/id/200/400/300',
+        'https://picsum.photos/id/300/500/300',
+        'https://picsum.photos/id/400/400/800',
+        'https://picsum.photos/id/500/400/300',
+        'https://picsum.photos/id/600/400/300',
+        'https://picsum.photos/id/700/500/300',
+        'https://picsum.photos/id/800/400/800',
+        'https://picsum.photos/id/900/400/300',
+        'https://picsum.photos/id/1000/500/300',
+    ],
     links: {
         repo: 'https://github.com/Term-5-CSD-ESC-Ascenda-BNB/web',
         live: 'https://esc-fe.ryanteozw.workers.dev/',

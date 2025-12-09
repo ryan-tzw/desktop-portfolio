@@ -41,7 +41,7 @@ export function ProjectWindow({
         <Window
             id={windowId}
             title={title}
-            config={{ size: { width: 800, height: 650 } }}
+            config={{ size: { width: 900, height: 740 } }}
         >
             {loading && (
                 <div className="grid h-full place-items-center">
