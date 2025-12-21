@@ -3,6 +3,8 @@ import type { Project } from '@/types'
 import { HorizontalDivider, VerticalDivider } from './Divider'
 import { ProjectTag } from './ProjectTag'
 import { ProjectCarousel } from './ProjectCarousel/ProjectCarousel'
+import { CtaButton } from './CtaButton'
+import { LinkButton } from './LinkButton'
 
 interface ProjectPageProps {
     project: Project
@@ -68,6 +70,31 @@ export function ProjectPage({ project }: ProjectPageProps) {
                             <ProjectTag tag={tag} key={index} />
                         ))}
                     </ul>
+                </section>
+
+                <section
+                    className={cn(
+                        'mx-6 grid place-items-center gap-4',
+                        'md:mx-0 md:flex md:justify-center'
+                    )}
+                >
+                    {project.links.live && (
+                        <CtaButton
+                            text="Explore the project!"
+                            href={project.links.live}
+                        />
+                    )}
+                    <div className="flex gap-4">
+                        {project.links.repo && (
+                            <LinkButton type="repo" href={project.links.repo} />
+                        )}
+                        {project.links.download && (
+                            <LinkButton
+                                type="download"
+                                href={project.links.download}
+                            />
+                        )}
+                    </div>
                 </section>
             </article>
         </div>
