@@ -20,7 +20,7 @@ export function ProjectPage({ project }: ProjectPageProps) {
                     'mx-6 mb-4 md:mb-6'
                 )}
             >
-                {'Ryan > Desktop > Dev > ' + project.title}
+                {'Ryan > Desktop > Dev > ' + project.id + '.html'}
             </span>
 
             {/* Page content */}
@@ -36,7 +36,7 @@ export function ProjectPage({ project }: ProjectPageProps) {
                 {/* Body */}
                 <section className="mx-6 md:mx-0">
                     <h1 className="font-fredoka mb-6 text-center text-4xl font-light">
-                        About this project
+                        About {project.title}
                     </h1>
                     <p className="whitespace-pre-line">{project.description}</p>
                 </section>

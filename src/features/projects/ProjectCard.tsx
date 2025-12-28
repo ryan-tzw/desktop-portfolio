@@ -35,7 +35,7 @@ export function ProjectCard({ id, image, title }: ProjectCardProps) {
                 />
                 <h3
                     className={cn(
-                        'font-fredoka mt-1 px-2 text-lg',
+                        'mt-2 px-2',
                         'overflow-hidden text-nowrap text-ellipsis'
                     )}
                 >

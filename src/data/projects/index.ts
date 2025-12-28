@@ -6,34 +6,20 @@ type MdxModule = {
     meta: Project
 }
 
+const mdxModules = import.meta.glob<MdxModule>('./*.mdx')
+
 /**
  * List of projects to display in ProjectsWindow.
  */
-export const projects: ProjectPreview[] = [
-    {
-        id: 'wayfare',
-        title: 'Wayfare',
-        thumbnail: '/projects/wayfare/thumb.webp',
-    },
-    {
-        id: 'wayfare2',
-        title: 'Wayfare',
-        thumbnail: '/projects/wayfare/thumb.webp',
-    },
-    {
-        id: 'wayfare3',
-        title: 'Wayfare',
-        thumbnail: '/projects/wayfare/thumb.webp',
-    },
-    {
-        id: 'wayfare4',
-        title: 'Wayfare',
-        thumbnail: '/projects/wayfare/thumb.webp',
-    },
-]
-
-// const mods = import.meta.glob<{ default: Project }>('./*/meta.ts')
-const mdxModules = import.meta.glob<MdxModule>('./*.mdx')
+const projects: ProjectPreview[] = []
+for (const key of Object.keys(mdxModules)) {
+    const id = key.split('./')[1].split('.')[0]
+    projects.push({
+        id: id,
+        preview: `/projects/${id}/preview.webp`,
+    })
+}
+export { projects }
 
 /**
  * Loads the full project data for a given project ID.

@@ -27,8 +27,8 @@ export function ProjectsWindow() {
                     <ProjectCard
                         key={proj.id}
                         id={proj.id}
-                        title={proj.title}
-                        image={proj.thumbnail}
+                        title={proj.id + '.html'}
+                        image={proj.preview}
                     />
                 ))}
             </ul>
