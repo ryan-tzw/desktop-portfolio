@@ -1,4 +1,10 @@
 import type { Project, ProjectPreview } from '@/types'
+import { ProjectSchema } from '@/types/Project'
+
+type MdxModule = {
+    default: React.ComponentType
+    meta: Project
+}
 
 /**
  * List of projects to display in ProjectsWindow.
@@ -26,15 +32,33 @@ export const projects: ProjectPreview[] = [
     },
 ]
 
-const mods = import.meta.glob<{ default: Project }>('./*/meta.ts')
+// const mods = import.meta.glob<{ default: Project }>('./*/meta.ts')
+const mdxModules = import.meta.glob<MdxModule>('./*.mdx')
 
 /**
  * Loads the full project data for a given project ID.
  */
 export async function loadProject(id: string): Promise<Project> {
-    const key = `./${id}/meta.ts`
-    const loader = mods[key]
+    const key = `./${id}.mdx`
+    const loader = mdxModules[key]
     if (!loader) throw new Error(`Project not found: ${id}`)
-    const mod = await loader()
-    return mod.default
+
+    const module = await loader()
+    const project = ProjectSchema.parse(module.meta)
+
+    return project
+}
+
+/**
+ * Loads the blog content for a given project ID.
+ */
+export async function loadBlog(id: string): Promise<React.ComponentType> {
+    const key = `./${id}.mdx`
+    const loader = mdxModules[key]
+    if (!loader) throw new Error(`Project not found: ${id}`)
+
+    const module = await loader()
+    const BlogContent = module.default
+
+    return BlogContent
 }

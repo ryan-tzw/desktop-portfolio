@@ -1,18 +1,24 @@
-export type Tag = {
-    name: string
-    type: 'domain' | 'language' | 'library' | 'tool' | 'other'
-}
+import * as z from 'zod'
 
-export type Project = {
-    id: string
-    title: string
-    description: string
-    heroImage: string
-    media?: string[]
-    links: {
-        repo?: string
-        live?: string
-        download?: string
-    }
-    tags: Tag[]
-}
+export const TagSchema = z.object({
+    name: z.string(),
+    type: z.enum(['domain', 'language', 'library', 'tool', 'other']),
+})
+
+export const ProjectSchema = z.object({
+    id: z.string(),
+    title: z.string(),
+    description: z.string(),
+    heroImage: z.string(),
+    media: z.array(z.string()).optional(),
+    links: z.object({
+        repo: z.string().optional(),
+        live: z.string().optional(),
+        download: z.string().optional(),
+    }),
+    tags: z.array(TagSchema),
+    hasBlog: z.boolean(),
+})
+
+export type Tag = z.infer<typeof TagSchema>
+export type Project = z.infer<typeof ProjectSchema>
