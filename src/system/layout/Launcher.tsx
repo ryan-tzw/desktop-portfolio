@@ -21,7 +21,7 @@ export function Launcher() {
             <div>
                 <header className="mb-4">
                     <h1 className="font-caveat text-6xl">Hi! I'm Ryan.</h1>
-                    <p className="mt-6 text-2xl">Welcome to my desktop!</p>
+                    <p className="mt-6 text-2xl">Welcome!</p>
                     <p className="mt-4">
                         Click on the buttons below to view more.
                         <br />
