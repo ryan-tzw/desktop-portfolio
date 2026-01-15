@@ -24,7 +24,7 @@ export function ProjectPage({ project }: ProjectPageProps) {
             </span>
 
             {/* Page content */}
-            <article className="mb-12 flex flex-col gap-6 md:mx-12 md:gap-10">
+            <article className="mb-12 flex flex-col gap-6 md:mx-12 md:gap-12">
                 {/* Hero image */}
                 <section>
                     <img
@@ -38,7 +38,9 @@ export function ProjectPage({ project }: ProjectPageProps) {
                     <h1 className="font-fredoka mb-6 text-center text-4xl font-light">
                         About {project.title}
                     </h1>
-                    <p className="whitespace-pre-line">{project.description}</p>
+                    <p className="m-0 whitespace-pre-line">
+                        {project.description}
+                    </p>
                 </section>
 
                 {/* Carousel */}
