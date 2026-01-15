@@ -1,0 +1,5 @@
+export { Hexagon } from './Hexagon'
+export { Circle } from './Circle'
+export { Square } from './Square'
+export { Triangle } from './Triangle'
+export { Shape } from './Shape'

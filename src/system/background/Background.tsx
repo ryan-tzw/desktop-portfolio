@@ -25,7 +25,7 @@ export function Background() {
             <canvas
                 ref={canvasRef}
                 id="background"
-                className="fixed top-0 left-0 h-full w-full"
+                className="fixed top-0 left-0 -z-1 h-full w-full"
             >
                 Animated background
             </canvas>
