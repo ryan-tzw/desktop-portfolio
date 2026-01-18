@@ -14,14 +14,14 @@ export function Launcher() {
             className={cn(
                 'grid place-items-center overflow-auto text-center',
                 'h-full max-h-[min(600px,95dvh)] w-full max-w-[min(480px,95dvw)]',
-                'shadow-solid rounded-2xl border bg-[rgba(255,255,255,0.4)] backdrop-blur',
+                'shadow-solid rounded-2xl border bg-[rgba(255,255,255,0.8)] backdrop-blur-xs',
                 'transition duration-300'
             )}
         >
             <div>
                 <header className="mb-4">
                     <h1 className="font-caveat text-6xl">Hi! I'm Ryan.</h1>
-                    <p className="mt-6 text-2xl">Welcome!</p>
+                    <p className="mt-6 text-2xl">Welcome to my site!</p>
                     <p className="mt-4">
                         Click on the buttons below to view more.
                         <br />

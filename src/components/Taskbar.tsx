@@ -1,3 +1,4 @@
+import { cn } from '@/lib/utils'
 import {
     faBatteryThreeQuarters,
     faWifi,
@@ -28,7 +29,13 @@ export function Taskbar() {
 
     return (
         <>
-            <div className="z-10 hidden h-8 w-full items-center gap-2 bg-[rgba(255,255,255,0.8)] px-6 text-sm shadow-sm md:flex">
+            <div
+                className={cn(
+                    'z-10 hidden h-8 w-full md:flex',
+                    'items-center gap-2 px-6 text-sm shadow-sm',
+                    'bg-[rgba(255,255,255,0.8)] backdrop-blur-xs'
+                )}
+            >
                 <span className="font-fredoka">{`</>`}</span>
                 <span className="font-fredoka">Ryan</span>
                 <div className="flex-1" />

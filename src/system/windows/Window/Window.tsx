@@ -44,6 +44,7 @@ export function Window({
             className={cn(
                 'flex flex-col overflow-hidden shadow-lg backdrop-blur-xs',
                 'transition duration-300 md:transition-[scale,opacity]',
+                'md:border',
                 'rounded-t-xl md:rounded-xl',
                 isVisible
                     ? 'translate-y-0 opacity-100 md:scale-100'
