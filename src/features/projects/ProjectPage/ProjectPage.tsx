@@ -33,23 +33,6 @@ export function ProjectPage({ project }: ProjectPageProps) {
                     />
                 </section>
 
-                {/* Body */}
-                <section className="mx-6 md:mx-0">
-                    <h1 className="font-fredoka mb-6 text-center text-4xl font-light">
-                        About {project.title}
-                    </h1>
-                    <p className="m-0 whitespace-pre-line">
-                        {project.description}
-                    </p>
-                </section>
-
-                {/* Carousel */}
-                {project.media && project.media.length > 0 && (
-                    <section>
-                        <ProjectCarousel images={project.media} />
-                    </section>
-                )}
-
                 {/* Skills and tools */}
                 <section className="mx-6 flex flex-col md:mx-0 md:flex-row">
                     {/* Section header */}
@@ -73,6 +56,23 @@ export function ProjectPage({ project }: ProjectPageProps) {
                         ))}
                     </ul>
                 </section>
+
+                {/* Body */}
+                <section className="mx-6 md:mx-0">
+                    <h1 className="font-fredoka mb-6 text-center text-4xl font-light">
+                        About {project.title}
+                    </h1>
+                    <p className="m-0 whitespace-pre-line">
+                        {project.description}
+                    </p>
+                </section>
+
+                {/* Carousel */}
+                {project.media && project.media.length > 0 && (
+                    <section>
+                        <ProjectCarousel images={project.media} />
+                    </section>
+                )}
 
                 <section
                     className={cn(

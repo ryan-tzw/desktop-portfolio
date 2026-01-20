@@ -7,7 +7,7 @@ interface ProjectCarouselProps {
     images: string[]
 }
 
-const TWEEN_FACTOR_BASE = 0.2
+const TWEEN_FACTOR_BASE = 0.1
 
 export function ProjectCarousel({ images }: ProjectCarouselProps) {
     const [emblaRef, emblaApi] = useEmblaCarousel({

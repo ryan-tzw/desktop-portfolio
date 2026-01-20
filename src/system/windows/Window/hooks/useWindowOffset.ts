@@ -29,10 +29,12 @@ export function useWindowOffset({
 
     useEffect(() => {
         function handleResize() {
-            const newPosition = {
-                x: window.innerWidth / 2 + offset.x - size.width / 2,
-                y: window.innerHeight / 2 + offset.y - size.height / 2,
-            }
+            const x = window.innerWidth / 2 + offset.x - size.width / 2
+            const y = Math.max(
+                0,
+                window.innerHeight / 2 + offset.y - size.height / 2
+            )
+            const newPosition = { x, y }
             onPositionChange(newPosition)
         }
 

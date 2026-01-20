@@ -9,17 +9,17 @@ export function ProjectTag({ tag }: ProjectTagProps) {
     const bgColorClass = () => {
         switch (tag.type) {
             case 'domain':
-                return 'bg-orange-300'
+                return 'bg-rose-300'
             case 'language':
                 return 'bg-blue-300'
             case 'library':
-                return 'bg-purple-300'
+                return 'bg-melrose-300'
             case 'tool':
-                return 'bg-rose-300'
+                return 'bg-emerald-200'
             case 'other':
-                return 'bg-emerald-300'
+                return 'bg-slate-300'
             default:
-                return 'bg-gray-300'
+                return 'bg-slate-300'
         }
     }
 

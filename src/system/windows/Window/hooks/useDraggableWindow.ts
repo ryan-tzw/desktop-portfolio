@@ -71,9 +71,6 @@ export function useDraggableWindow({
             : null
     }, [transform, position, size])
 
-    console.log('transform:', transform)
-    console.log('clampedTransform:', clampedTransform)
-
     useEffect(() => {
         if (clampedTransform) {
             lastTransform.current = {
