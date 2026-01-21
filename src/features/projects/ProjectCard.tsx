@@ -3,11 +3,10 @@ import { useWindowStore } from '@/stores/windows.store'
 
 interface ProjectCardProps {
     id: string
-    image: string
     title: string
 }
 
-export function ProjectCard({ id, image, title }: ProjectCardProps) {
+export function ProjectCard({ id, title }: ProjectCardProps) {
     const open = useWindowStore((state) => state.open)
 
     const handleClick = () => {
@@ -28,11 +27,21 @@ export function ProjectCard({ id, image, title }: ProjectCardProps) {
                     'active:scale-97 active:bg-neutral-100'
                 )}
             >
-                <img
-                    src={image}
-                    alt={title}
-                    className="pointer-events-none w-full rounded-md select-none"
-                />
+                <picture>
+                    <source
+                        srcSet={`/projects/${id}/avif/preview.avif`}
+                        type="image/avif"
+                    />
+                    <source
+                        srcSet={`/projects/${id}/webp/preview.webp`}
+                        type="image/webp"
+                    />
+                    <img
+                        src={`/projects/${id}/jpg/preview.jpg`}
+                        alt={title}
+                        className="pointer-events-none w-full rounded-md select-none"
+                    />
+                </picture>
                 <h3
                     className={cn(
                         'mt-2 px-2',

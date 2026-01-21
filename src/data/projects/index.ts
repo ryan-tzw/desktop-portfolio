@@ -1,4 +1,4 @@
-import type { Project, ProjectPreview } from '@/types'
+import type { Project } from '@/types'
 import { ProjectSchema } from '@/types/Project'
 
 type MdxModule = {
@@ -9,15 +9,12 @@ type MdxModule = {
 const mdxModules = import.meta.glob<MdxModule>('./*.mdx')
 
 /**
- * List of projects to display in ProjectsWindow.
+ * List of projects IDs to display in ProjectsWindow.
  */
-const projects: ProjectPreview[] = []
+const projects: string[] = []
 for (const key of Object.keys(mdxModules)) {
     const id = key.split('./')[1].split('.')[0]
-    projects.push({
-        id: id,
-        preview: `/projects/${id}/preview.webp`,
-    })
+    projects.push(id)
 }
 export { projects }
 

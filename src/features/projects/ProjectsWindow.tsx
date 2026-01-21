@@ -23,13 +23,8 @@ export function ProjectsWindow() {
                     'md:grid-cols-3'
                 )}
             >
-                {projects.map((proj) => (
-                    <ProjectCard
-                        key={proj.id}
-                        id={proj.id}
-                        title={proj.id + '.html'}
-                        image={proj.preview}
-                    />
+                {projects.map((id) => (
+                    <ProjectCard key={id} id={id} title={id + '.html'} />
                 ))}
             </ul>
         </Window>
