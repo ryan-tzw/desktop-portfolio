@@ -5,6 +5,7 @@ import { ProjectTag } from './ProjectTag'
 import { ProjectCarousel } from './ProjectCarousel/ProjectCarousel'
 import { CtaButton } from './CtaButton'
 import { LinkButton } from './LinkButton'
+import { Picture } from '@/components/Picture'
 
 interface ProjectPageProps {
     project: Project
@@ -27,8 +28,8 @@ export function ProjectPage({ project }: ProjectPageProps) {
             <article className="mb-12 flex flex-col gap-6 md:mx-12 md:gap-12">
                 {/* Hero image */}
                 <section>
-                    <img
-                        src={project.heroImage}
+                    <Picture
+                        filePath={`/projects/${project.id}/avif/hero.avif`}
                         className="md:shadow-project-hero md:rounded-lg"
                     />
                 </section>
@@ -70,7 +71,7 @@ export function ProjectPage({ project }: ProjectPageProps) {
                 {/* Carousel */}
                 {project.media && project.media.length > 0 && (
                     <section>
-                        <ProjectCarousel images={project.media} />
+                        <ProjectCarousel media={project.media} />
                     </section>
                 )}
 

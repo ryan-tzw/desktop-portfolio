@@ -2,17 +2,18 @@ import useEmblaCarousel from 'embla-carousel-react'
 import { CarouselControls } from './CarouselControls/CarouselControls'
 import { useCallback, useEffect, useRef } from 'react'
 import type { EmblaCarouselType } from 'embla-carousel'
+import { Picture } from '@/components/Picture'
 
 interface ProjectCarouselProps {
-    images: string[]
+    media: string[]
 }
 
 const TWEEN_FACTOR_BASE = 0.1
 
-export function ProjectCarousel({ images }: ProjectCarouselProps) {
+export function ProjectCarousel({ media }: ProjectCarouselProps) {
     const [emblaRef, emblaApi] = useEmblaCarousel({
         loop: false,
-        active: images.length > 1,
+        active: media.length > 1,
     })
     const tweenFactor = useRef(0)
     const tweenNodes = useRef<HTMLElement[]>([])
@@ -86,21 +87,33 @@ export function ProjectCarousel({ images }: ProjectCarouselProps) {
             {/* Viewport */}
             <div className="overflow-hidden">
                 <div
-                    className="embla__viewport mx-auto aspect-[4/3] w-[60%]"
+                    className="embla__viewport mx-auto aspect-[4/3] w-[90%]"
                     ref={emblaRef}
                 >
                     <div className="embla__container -ml-4 flex h-full">
-                        {images.map((src, index) => (
+                        {media.map((src, index) => (
                             <div
                                 className="embla__slide shrink-0 grow-0 basis-1/1 pl-4 md:basis-[100%]"
                                 key={index}
                             >
-                                <div className="embla__parallax h-full overflow-hidden md:rounded-xl">
+                                <div className="embla__parallax h-full overflow-hidden border md:rounded-xl">
                                     <div className="embla__parallax__layer relative flex h-full w-full justify-center">
-                                        <img
-                                            src={src}
-                                            className="aspect-[4/3] h-full scale-110 object-cover"
-                                        />
+                                        {src.endsWith('.mp4') ? (
+                                            <video
+                                                src={src}
+                                                className="aspect-[4/3] h-full object-contain"
+                                                autoPlay
+                                                muted
+                                                loop
+                                                playsInline
+                                                controls
+                                            />
+                                        ) : (
+                                            <Picture
+                                                filePath={src}
+                                                className="aspect-[4/3] h-full scale-110 object-cover"
+                                            />
+                                        )}
                                     </div>
                                 </div>
                             </div>
@@ -110,7 +123,7 @@ export function ProjectCarousel({ images }: ProjectCarouselProps) {
             </div>
 
             {/* Controls */}
-            {images.length > 1 && (
+            {media.length > 1 && (
                 <CarouselControls
                     emblaApi={emblaApi}
                     className="p-2 md:mx-[20%]"

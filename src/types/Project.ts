@@ -9,7 +9,6 @@ export const ProjectSchema = z.object({
     id: z.string(),
     title: z.string(),
     description: z.string(),
-    heroImage: z.string(),
     media: z.array(z.string()).optional(),
     links: z.object({
         repo: z.string().optional(),
