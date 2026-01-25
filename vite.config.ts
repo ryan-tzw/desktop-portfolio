@@ -4,6 +4,7 @@ import tailwindcss from '@tailwindcss/vite'
 import mdx from '@mdx-js/rollup'
 import remarkGfm from 'remark-gfm'
 import path from 'path'
+import rehypePrettyCode from 'rehype-pretty-code'
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -12,6 +13,15 @@ export default defineConfig({
             enforce: 'pre',
             ...mdx({
                 remarkPlugins: [remarkGfm],
+                rehypePlugins: [
+                    [
+                        rehypePrettyCode,
+                        {
+                            theme: 'material-theme-palenight',
+                            keepBackground: false,
+                        },
+                    ],
+                ],
             }),
         },
         react(),

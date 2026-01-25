@@ -53,8 +53,13 @@ export async function loadProject(id: string): Promise<Project> {
         }
     }
 
-    const project = ProjectSchema.parse(module.meta)
-    project.media = [...media]
+    const projectMeta = ProjectSchema.parse(module.meta)
+
+    const project: Project = {
+        ...projectMeta,
+        media: [...media],
+        content: module.default,
+    }
 
     return project
 }
@@ -62,13 +67,13 @@ export async function loadProject(id: string): Promise<Project> {
 /**
  * Loads the blog content for a given project ID.
  */
-export async function loadBlog(id: string): Promise<React.ComponentType> {
-    const key = `./${id}.mdx`
-    const loader = mdxModules[key]
-    if (!loader) throw new Error(`Project not found: ${id}`)
+// export async function loadBlog(id: string): Promise<React.ComponentType> {
+//     const key = `./${id}.mdx`
+//     const loader = mdxModules[key]
+//     if (!loader) throw new Error(`Project not found: ${id}`)
 
-    const module = await loader()
-    const BlogContent = module.default
+//     const module = await loader()
+//     const BlogContent = module.default
 
-    return BlogContent
-}
+//     return BlogContent
+// }

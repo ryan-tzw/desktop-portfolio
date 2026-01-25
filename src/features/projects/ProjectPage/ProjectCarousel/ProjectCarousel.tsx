@@ -3,6 +3,7 @@ import { CarouselControls } from './CarouselControls/CarouselControls'
 import { useCallback, useEffect, useRef } from 'react'
 import type { EmblaCarouselType } from 'embla-carousel'
 import { Picture } from '@/components/Picture'
+import { cn } from '@/lib/utils'
 
 interface ProjectCarouselProps {
     media: string[]
@@ -96,8 +97,13 @@ export function ProjectCarousel({ media }: ProjectCarouselProps) {
                                 className="embla__slide shrink-0 grow-0 basis-1/1 pl-4 md:basis-[100%]"
                                 key={index}
                             >
-                                <div className="embla__parallax h-full overflow-hidden border md:rounded-xl">
-                                    <div className="embla__parallax__layer relative flex h-full w-full justify-center">
+                                <div className="embla__parallax h-full overflow-hidden border bg-gray-50 md:rounded-xl">
+                                    <div
+                                        className={cn(
+                                            'embla__parallax__layer relative h-full w-full',
+                                            'flex justify-center'
+                                        )}
+                                    >
                                         {src.endsWith('.mp4') ? (
                                             <video
                                                 src={src}
@@ -111,7 +117,7 @@ export function ProjectCarousel({ media }: ProjectCarouselProps) {
                                         ) : (
                                             <Picture
                                                 filePath={src}
-                                                className="aspect-[4/3] h-full scale-110 object-cover"
+                                                className="h-full scale-110 object-contain"
                                             />
                                         )}
                                     </div>

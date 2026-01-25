@@ -33,6 +33,65 @@
 }
 
 @layer utilities {
+    /* Override default prose code styles */
+    .prose {
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            @apply font-fredoka font-light;
+        }
+
+        h1 {
+            @apply text-center;
+        }
+
+        /* Inline code */
+        :not(pre) > code {
+            @apply bg-melrose-100 rounded px-1.5 py-0.5 font-medium;
+        }
+
+        code::before,
+        code::after {
+            content: '';
+        }
+
+        pre {
+            background-color: #2a2d3f;
+        }
+
+        li {
+            @apply my-0 mb-1;
+        }
+
+        ul,
+        ol {
+            @apply my-0;
+        }
+
+        hr {
+            @apply my-8;
+        }
+
+        a {
+            @apply text-melrose-600 underline-offset-2;
+        }
+
+        blockquote {
+            @apply bg-melrose-50 border-melrose-300 rounded border-l-4 py-2 pl-4 not-italic;
+
+            p {
+                @apply my-0;
+                &::before,
+                &::after {
+                    content: '';
+                }
+            }
+        }
+    }
+
     /* Reusable tilted marker behind text */
     .tilt-highlight {
         @apply relative z-0 inline;
