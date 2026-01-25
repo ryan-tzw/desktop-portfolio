@@ -1,0 +1,23 @@
+export const meta = {
+    id: 'simple-neural-net',
+    title: 'Simple Neural Net',
+    links: {},
+    tags: [
+        { name: 'Machine Learning', type: 'domain' },
+        { name: 'Python', type: 'language' },
+        { name: 'NumPy', type: 'library' },
+        { name: 'Matplotlib', type: 'library' },
+        { name: 'Pandas', type: 'library' },
+    ],
+}
+
+# Simple Neural Network from Scratch
+
+This project implements a simple feedforward 2-layer neural network from scratch using Python and NumPy.
+It includes forward propagation, backpropagation, and training using gradient descent.
+The network is trained on the MNIST dataset of handwritten digits to perform digit classification,
+and achieves ~88% accuracy in spite of its simplicity.
+
+The workflow loads and preprocesses CSV data using Pandas, normalises the pixel values,
+one-hot encodes the labels, and uses NumPy to build and train the neural network,
+implementing ReLU activations, softmax outputs, forward/backward propagation, and gradient descent.

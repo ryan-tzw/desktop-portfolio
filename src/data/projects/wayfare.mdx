@@ -1,0 +1,85 @@
+export const meta = {
+    id: 'wayfare',
+    title: 'Wayfare',
+    links: {
+        repo: 'https://github.com/Term-5-CSD-ESC-Ascenda-BNB/web',
+        live: 'https://esc-fe.ryanteozw.workers.dev/',
+    },
+    tags: [
+        { name: 'Web Development', type: 'domain' },
+        { name: 'Computer Graphics', type: 'domain' },
+        { name: 'UI/UX Design', type: 'domain' },
+        { name: 'React', type: 'library' },
+        { name: 'TypeScript', type: 'language' },
+        { name: 'Three.js', type: 'library' },
+        { name: 'GLSL', type: 'language' },
+        { name: 'Mantine UI', type: 'library' },
+        { name: 'Vite', type: 'tool' },
+        { name: 'Figma', type: 'tool' },
+        { name: 'Git', type: 'tool' },
+    ],
+}
+
+# Wayfare - A Hotel Booking Website
+
+Wayfare is a hotel booking website developed as a group project for the _50.003 Elements of Software Construction_ module at SUTD.
+
+Our implemented features include:
+
+- Landing page with responsive 3D hero section
+- Hotel search and filtering with an interactive map
+- Login and signup pages with form validation + sliding transition for switching between the two
+- Booking system with date selection and room availability checks
+- Nearby attractions display using Overpass API
+- Payment integration using Stripe API
+
+---
+
+## 🛠️ How It Was Made
+
+The initial UI design was created in Figma. This was before we were provided with the API documentation,
+so some designs had to be scrapped or reworked to fit the available data and functionality.
+
+We built the website in React and TypeScript, and used the Mantine UI library for pre-built components and styling.
+Our backend was developed with NestJS and Supabase, though I primarily worked on the frontend
+and didn't touch the backend code, apart from helping with some testing and debugging.
+I made the 3D hero section using Three.js and some GLSL shader code.
+
+## 📝 What I Worked On
+
+1. Search results page + map integration
+
+    The search function first converts the user's search input into a [query string](https://en.wikipedia.org/wiki/Query_string).
+    When the browser navigates to the search results page, the parameters are parsed and used to query the backend for matching hotels.
+
+    The results are then displayed alongside an interactive map showing the locations of the hotels.
+    This map was created using the [React Leaflet](https://react-leaflet.js.org/) library.
+
+2. 3D hero section
+
+    I came up with the idea for this feature after examining the API we were given,
+    and seeing that it provides latitude and longitude data on search results.
+    This gave me the inspiration to create a 3D globe that, upon entering a destination,
+    would spin to show the location and drop a pin on it.
+
+    I made the pin model in Blender, and the globe is just a simple sphere with a texture map applied to it
+    (texture map taken from [here](https://www.solarsystemscope.com/textures/)).
+    Some shader code was written to create the transition between the day and night textures,
+    the specular highlights on the water, and the atmosphere glow.
+
+3. Login and signup pages
+
+    These were fairly simple pages, implemented with Mantine's form validation hooks.
+    The two pages share the same but mirrored layout, with a sliding transition to toggle between them.
+
+4. Figma prototype
+
+    Though this wasn't part of the assigned work, a groupmate and I created a prototype in Figma
+    ahead of time so that the rest of the team could have a visual reference to work from.
+
+---
+
+Unfortunately, the backend can't stay up permanently because of Railway's free-tier limits,
+so there's a video demo in the carousel if you'd like to see the full user flow.
+
+---

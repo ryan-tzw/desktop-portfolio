@@ -1,0 +1,62 @@
+export const meta = {
+    id: 'desktop',
+    title: 'Desktop Portfolio',
+    links: {
+        repo: 'https://github.com/ryan-tzw/desktop-portfolio',
+    },
+    tags: [
+        { name: 'Web Development', type: 'domain' },
+        { name: 'React', type: 'library' },
+        { name: 'TypeScript', type: 'language' },
+        { name: 'MDX', type: 'tool' },
+        { name: 'Vite', type: 'tool' },
+        { name: 'Tailwind CSS', type: 'library' },
+        { name: 'Git', type: 'tool' },
+        { name: 'Zustand', type: 'library' },
+    ],
+}
+
+# Desktop Portfolio Website
+
+This is the website you're currently on!
+It is designed to look and feel like a desktop operating system interface.
+This website serves as my personal portfolio, showcasing my projects and skills in a unique and interactive way.
+
+## 🖥️ Why a Desktop Interface?
+
+I spend most of my time on my computer, as that's where my hobbies, work, and projects all happen,
+so it felt natural to create a portfolio that reflects that environment.
+
+The desktop metaphor also gives me more opportunities to add playful and interactive elements that better
+represent who I am as a developer and person - elements that might not fit as well in a traditional website layout.
+
+Also, I just think it's cool! Hopefully the novelty of the interface makes it more memorable and fun to explore.
+
+## 🛠️ How It Was Made
+
+1. **The Windows**
+
+    The core feature of this website, as you might expect, is the window management system,
+    which renders draggable windows that can be opened and closed just like a real desktop OS.
+    This system is built using dnd-kit for accessible drag-and-drop functionality, and Zustand for state management.
+
+2. **The Content**
+
+    The content (e.g., what you're reading right now!) is written in MDX, which allows me to easily
+    write rich content using Markdown syntax while also embedding React components when needed.
+    This makes it simple to add new projects or update existing ones without touching the core codebase.
+
+    I used `@tailwindcss/typography` to add default styles to the MDX content, but added
+    some overrides to keep the appearance consistent and to my liking.
+
+    I also added a couple component overrides to better fit the design I wanted:
+    - External links open in a new "window" within the desktop interface.
+      I like this because it feels more integrated and immersive,
+      but users can still right-click and open in a new tab if they want to.
+    - h2 headings have a custom highlighted style (e.g., the "🛠️ How It Was Made" above).
+
+3. **The Background**
+
+    The animated background is created using the Canvas API.
+    Currently, the default background just draws simple moving shapes.
+    However, the system is designed to be extensible, so I plan to add different background options in the future.

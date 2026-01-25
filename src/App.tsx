@@ -1,12 +1,20 @@
-import { Window } from './components/Window'
+import './App.css'
+import { Taskbar } from './components/Taskbar'
+import { Background } from './system/background'
+import { Launcher } from './system/layout/Launcher'
+import { WindowManager } from './system/windows/WindowManager'
 
 function App() {
     return (
         <>
-            <h1 className="font-black">Test</h1>
-            <Window>
-                <h2 className="font-bold">Hello, World!</h2>
-            </Window>
+            <Taskbar />
+
+            <main className="relative z-10 grid h-dvh place-items-center">
+                <Launcher />
+                <WindowManager />
+            </main>
+
+            <Background />
         </>
     )
 }

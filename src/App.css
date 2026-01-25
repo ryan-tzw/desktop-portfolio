@@ -1,0 +1,16 @@
+* {
+    scrollbar-color: #999 transparent;
+    /* border: red solid 1px; */
+}
+
+html,
+body {
+    max-width: 100%;
+    overflow: hidden;
+}
+
+#root {
+    position: relative;
+    height: 100dvh;
+    max-width: 100%;
+}
