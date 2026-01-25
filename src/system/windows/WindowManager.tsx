@@ -1,6 +1,10 @@
 import { useWindowStore } from '@/stores/windows.store'
 import { WINDOW_REGISTRY } from './WindowRegistry'
 
+/**
+ * This component listens to the window store and renders any active windows.
+ * Uses WINDOW_REGISTRY to determine behaviour when rendering each window.
+ */
 export function WindowManager() {
     const windows = useWindowStore((state) => state.activeWindows)
 
@@ -9,6 +13,8 @@ export function WindowManager() {
             {Array.from(windows.entries()).map(([id, params]) => {
                 console.log('Rendering window:', id)
 
+                // Windows with dynamic content should be prefixed with their type
+                // e.g. "project:my-cool-project" or "external:https://example.com"
                 const [windowType] = id.split(':')
                 const windowConfig = WINDOW_REGISTRY[windowType]
 
@@ -38,6 +44,23 @@ export function WindowManager() {
                                 windowId={id}
                                 projectId={projectId}
                                 title={title}
+                            />
+                        )
+                    }
+                    case 'external': {
+                        const src = params.src as string
+
+                        if (!src) {
+                            console.warn(`No src for external window: ${id}`)
+                            return null
+                        }
+                        const ExternalComponent = windowConfig.component
+                        return (
+                            <ExternalComponent
+                                key={id}
+                                windowId={id}
+                                src={src}
+                                title={params.title as string}
                             />
                         )
                     }

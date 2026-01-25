@@ -1,6 +1,7 @@
 import type { WindowConfig } from './Window/types'
 import { AboutWindow } from '@/features/about/AboutWindow'
 import { ContactWindow } from '@/features/contact/ContactWindow'
+import { ExternalWindow } from '@/features/external/ExternalWindow'
 import { ProjectWindow } from '@/features/projects/ProjectWindow'
 import { ProjectsWindow } from '@/features/projects/ProjectsWindow'
 
@@ -11,6 +12,7 @@ import { ProjectsWindow } from '@/features/projects/ProjectsWindow'
  * Types:
  * - static: always the same window instance (e.g. About, Projects)
  * - project: tied to a specific project. Props passed in to dynamically render.
+ * - external: displays external content in an iframe.
  */
 export const WINDOW_REGISTRY: Record<string, WindowConfig> = {
     about: {
@@ -28,5 +30,9 @@ export const WINDOW_REGISTRY: Record<string, WindowConfig> = {
     contact: {
         component: ContactWindow,
         type: 'static',
+    },
+    external: {
+        component: ExternalWindow,
+        type: 'external',
     },
 } as const

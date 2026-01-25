@@ -1,3 +1,4 @@
+import type { ExternalWindowProps } from '@/features/external/ExternalWindow'
 import type { ProjectWindowProps } from '@/features/projects/ProjectWindow'
 
 /** Config for desktop windows (not needed on mobile where windows are full-screen) */
@@ -31,4 +32,12 @@ export interface StaticWindowConfig {
     component: React.ComponentType
 }
 
-export type WindowConfig = StaticWindowConfig | ProjectWindowConfig
+export interface ExternalWindowConfig {
+    type: 'external'
+    component: React.ComponentType<ExternalWindowProps>
+}
+
+export type WindowConfig =
+    | StaticWindowConfig
+    | ProjectWindowConfig
+    | ExternalWindowConfig

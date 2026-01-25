@@ -6,9 +6,16 @@ import { ProjectCarousel } from './ProjectCarousel/ProjectCarousel'
 import { CtaButton } from './CtaButton'
 import { LinkButton } from './LinkButton'
 import { Picture } from '@/components/Picture'
+import { ExternalLink } from '@/features/external/ExternalLink'
 
 interface ProjectPageProps {
     project: Project
+}
+
+const components = {
+    a(props: React.ComponentPropsWithoutRef<'a'>) {
+        return <ExternalLink url={props.href!}>{props.children}</ExternalLink>
+    },
 }
 
 export function ProjectPage({ project }: ProjectPageProps) {
@@ -60,7 +67,9 @@ export function ProjectPage({ project }: ProjectPageProps) {
 
                 {/* Body */}
                 <section className="prose mx-6 w-full max-w-none md:mx-0">
-                    {project.content && <project.content />}
+                    {project.content && (
+                        <project.content components={components} />
+                    )}
                 </section>
 
                 {/* Carousel */}
