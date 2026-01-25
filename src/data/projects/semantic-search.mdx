@@ -1,0 +1,23 @@
+export const meta = {
+    id: 'semantic-search',
+    title: 'Semantic Search',
+    links: {
+        repo: 'https://github.com/ryan-tzw/semantic-search',
+    },
+    tags: [
+        { name: 'Natural Language Processing', type: 'domain' },
+        { name: 'Python', type: 'language' },
+        { name: 'SentenceTransformers', type: 'library' },
+        { name: 'ChromaDB', type: 'library' },
+    ],
+}
+
+# ArXiv Semantic Search
+
+This is a lightweight semantic search engine written in Python that indexes arXiv abstracts.
+It fetches paper metadata, preprocesses the abstracts, generates local embeddings using SentenceTransformers,
+and stores them in a ChromaDB vector database for efficient similarity search.
+You can then input natural language queries to retrieve relevant papers based on semantic similarity.
+
+This project was created during a time when I had gotten interested in machine learning and natural language processing,
+so I built this project to explore the capabilities of modern NLP techniques and teach myself more about vector databases and semantic search.

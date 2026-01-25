@@ -14,7 +14,14 @@ interface ProjectPageProps {
 
 const components = {
     a(props: React.ComponentPropsWithoutRef<'a'>) {
-        return <ExternalLink url={props.href!}>{props.children}</ExternalLink>
+        return <ExternalLink url={props.href!} {...props} />
+    },
+    h2(props: React.ComponentPropsWithoutRef<'h2'>) {
+        return (
+            <h2 {...props}>
+                <span className="tilt-highlight">{props.children}</span>
+            </h2>
+        )
     },
 }
 
@@ -66,7 +73,7 @@ export function ProjectPage({ project }: ProjectPageProps) {
                 </section>
 
                 {/* Body */}
-                <section className="prose mx-6 w-full max-w-none md:mx-0">
+                <section className="prose mx-6 max-w-none md:mx-0">
                     {project.content && (
                         <project.content components={components} />
                     )}

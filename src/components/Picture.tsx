@@ -15,7 +15,7 @@ export function Picture({ filePath, className }: PictureProps) {
 
     return (
         <>
-            <picture>
+            <picture className="h-full">
                 <source srcSet={avif} type="image/avif" />
                 <source srcSet={webp} type="image/webp" />
                 <img src={jpg} className={className} />

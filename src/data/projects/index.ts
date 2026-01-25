@@ -37,18 +37,18 @@ export async function loadProject(id: string): Promise<Project> {
     const module = await loader()
     const media: string[] = []
 
+    for (const [k, v] of Object.entries(mp4Modules)) {
+        if (k.includes(`/projects/${id}/`)) {
+            media.push(v.default)
+        }
+    }
+
     for (const [k, v] of Object.entries(avifModules)) {
         if (
             k.includes(`/projects/${id}/`) &&
             !k.includes('hero') &&
             !k.includes('preview')
         ) {
-            media.push(v.default)
-        }
-    }
-
-    for (const [k, v] of Object.entries(mp4Modules)) {
-        if (k.includes(`/projects/${id}/`)) {
             media.push(v.default)
         }
     }

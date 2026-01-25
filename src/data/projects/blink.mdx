@@ -1,0 +1,80 @@
+export const meta = {
+    id: 'blink',
+    title: 'Blink',
+    links: {
+        repo: 'https://github.com/ryan-tzw/Infosys'
+    },
+    tags: [
+        { name: 'Mobile Development', type: 'domain' },
+        { name: 'Android Studio', type: 'tool' },
+        { name: 'Java', type: 'language' },
+        { name: 'Firebase', type: 'tool' },
+        { name: 'Git', type: 'tool' },
+        { name: 'Figma', type: 'tool' },
+    ],
+
+}
+
+# Blink - A Social Platform App
+
+Blink is a social platform app developed as a group project for the _50.001 Information Systems & Programming_ module at SUTD.
+
+The implemented features include:
+
+- User authentication (signup, login, logout)
+- User profiles with profile picture and bio
+- Join and create interest-based communities
+- Create, edit, and delete posts with text and images
+- Like and comment on posts
+- Chat feature with real-time messaging
+- Push notifications for new messages and interactions
+
+---
+
+## 🛠️ How It Was Made
+
+The UI design was created in Figma so that the team has a reference to work from,
+though we overlooked some screens that had to be added later on.
+
+We built the app using Android Studio with Java as the programming language.
+Firebase was used for the backend services, including authentication, database, and storage.
+
+## 📝 What I Worked On
+
+1. **Communities feature**
+
+    I implemented the communities feature, which allows users to join existing communities or create new ones based on their interests.
+    Each community has its own page displaying posts from members.
+    Users can create posts within a community, and other members can like and comment on these posts.
+
+    This includes:
+    - **Community list** page showing all available communities
+    - **Community detail** page displaying posts within the community
+    - **Create community** page with form validation
+    - **Create posts** within a community
+    - **Like and comment** functionality on posts
+
+2. **Chat feature**
+
+    I created the page that lists all chats, and the functionality for starting
+    new private and group chats.
+    As for the actual chatting feature, that was initially developed by another team member,
+    but I refined the code, layout, and UI to make it a more polished experience.
+
+    The chat feature uses Firebase's real-time database to ensure messages are delivered instantly.
+    Push notifications are also implemented to alert users of new messages.
+
+3. **Notifications**
+
+    Push notifications was developed with Firebase Cloud Messaging by another team member.
+    I built upon his work with the notifications page,
+    which lists all recent notifications for the user.
+    Users can tap on a notification to be taken to the relevant page (e.g., chat or post),
+    swipe right to delete it, swipe left to mark it as read/unread,
+    or clear all notifications at once using the button in the top-right corner.
+
+4. **Profile page**
+
+    I worked on the profile page layout and UI,
+    allowing users to view and edit profile information such as profile picture and bio.
+    This also includes displaying the user's posts.

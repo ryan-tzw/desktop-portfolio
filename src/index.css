@@ -90,6 +90,10 @@
                 }
             }
         }
+
+        img {
+            @apply mx-auto w-[90%] rounded-md;
+        }
     }
 
     /* Reusable tilted marker behind text */

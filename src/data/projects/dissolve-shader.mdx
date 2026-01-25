@@ -1,0 +1,25 @@
+export const meta = {
+    id: 'dissolve-shader',
+    title: 'Dissolve Shader',
+    links: {
+        live: 'https://dissolve-shader.vercel.app/',
+        repo: 'https://github.com/ryan-tzw/dissolve-shader',
+    },
+    tags: [
+        { name: 'Computer Graphics', type: 'domain' },
+        { name: 'Three.js', type: 'tool' },
+        { name: 'WebGL', type: 'tool' },
+        { name: 'GLSL', type: 'language' },
+        { name: 'Vite', type: 'tool' },
+    ],
+}
+
+# Dissolve Shader in Three.js
+
+This is a simple demo of a dissolve shader effect using Three.js and GLSL.
+
+I used [three-custom-shader-material](https://www.npmjs.com/package/three-custom-shader-material)
+to inject shader code into Three.js's MeshStandardMaterial. This allows me to leverage the existing lighting
+and PBR calculations of MeshStandardMaterial, while adding custom effects like, in this case, noise-based dissolving.
+
+The dissolve effect is driven by simplex noise and a time uniform, to create the animated dissolving appearance.
