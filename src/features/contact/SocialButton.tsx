@@ -15,6 +15,7 @@ export function SocialButton({ href, children }: SocialButtonProps) {
                 'active:translate-y-1 active:shadow-none'
             )}
             href={href}
+            target="_blank"
         >
             {children}
         </a>
