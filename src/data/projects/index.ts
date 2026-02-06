@@ -63,17 +63,3 @@ export async function loadProject(id: string): Promise<Project> {
 
     return project
 }
-
-/**
- * Loads the blog content for a given project ID.
- */
-// export async function loadBlog(id: string): Promise<React.ComponentType> {
-//     const key = `./${id}.mdx`
-//     const loader = mdxModules[key]
-//     if (!loader) throw new Error(`Project not found: ${id}`)
-
-//     const module = await loader()
-//     const BlogContent = module.default
-
-//     return BlogContent
-// }
